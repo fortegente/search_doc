@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<OX>
+    <OXMENU id="NAVIGATION_ESHOPADMIN">
+        <MAINMENU id="zsdocs">
+            <SUBMENU id="zsdocsinfo" cl="admin_zsdocuments" list="documents_list">
+                <TAB id="tbcldocuments_main" cl="documents_main" />
+            </SUBMENU>
+        </MAINMENU>
+    </OXMENU>
+</OX>
