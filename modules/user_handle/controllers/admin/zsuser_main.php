@@ -5,8 +5,43 @@ class zsUser_Main extends zsUser_Main_parent
     {
         $sTemplate = parent::render();
         $this->_aViewData["pay_duration"] = array('', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+        $aUserRights = $this->_aViewData["rights"];
+        $aUserRights = $this->_setRightsCollection($aUserRights);
+        $this->_aViewData["rights"] = $aUserRights;
 
          return $sTemplate;
+    }
+
+    private function _setRightsCollection($aUserRights)
+    {
+        $oAuthUser = oxNew( 'oxuser' );
+        $oAuthUser->loadAdminUser();
+        $blisMallAdmin = $oAuthUser->oxuser__oxrights->value == "malladmin";
+        $iPos = count($aUserRights);
+
+        $aUserRights[$iPos] = new stdClass();
+        $aUserRights[$iPos]->name = 'Trial';
+        $aUserRights[$iPos]->id   = "trial_user";
+
+        $soxId = $this->_aViewData["oxid"] = $this->getEditObjectId();
+
+        if ( $soxId != "-1" && isset( $soxId ) ) {
+            $oUser = oxNew( "oxuser" );
+            $oUser->load( $soxId);
+            $this->_aViewData["edit"] =  $oUser;
+
+            if ( !( $oUser->oxuser__oxrights->value == "malladmin" && !$blisMallAdmin ) ) {
+                reset( $aUserRights );
+                while ( list(, $val ) = each( $aUserRights ) ) {
+                    if ( $val->id == $oUser->oxuser__oxrights->value) {
+                        $val->selected = 1;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return $aUserRights;
     }
 
     public function save()

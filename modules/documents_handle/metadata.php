@@ -19,7 +19,7 @@ $aModule = array(
           'zsDocumentslist' => 'documents_handle/models/zsDocumentslist.php'
       ),
       'templates' => array(
-          'documents.tpl' => 'documents_handle/views/admin/tpl/documents.tpl',
+          'admin_documents.tpl' => 'documents_handle/views/admin/tpl/admin_documents.tpl',
           'documents_list.tpl' => 'documents_handle/views/admin/tpl/documents_list.tpl',
           'documents_main.tpl' => 'documents_handle/views/admin/tpl/documents_main.tpl'
       )
