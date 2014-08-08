@@ -1,9 +1,9 @@
 <?php
-class documents extends oxUBase
+class zsaccount_documents extends Account
 {
-    protected $_sThisTemplate = 'documents.tpl';
+    protected $_sThisTemplate = 'account_documents.tpl';
 
-    protected $_oDocumentsList = null;
+    protected $_aDocumentsList = array();
 
     protected $_oPageNavigation = null;
 
@@ -11,32 +11,35 @@ class documents extends oxUBase
 
     protected $_documentsPerPage = 20;
 
-    protected $_blSaveStatus = null;
+    protected $_blRemoveStatus = null;
 
-    public function getDocumentsList()
+    public function getUserDocumentsList()
     {
-        if ( $this->_oDocumentsList === null ) {
-            $oDocumentsList = oxNew("zsDocumentslist");
-            $oDocumentsList->init("zsDocuments");
+        if (!$this->_aDocumentsList) {
+            $oUserToDocuments = oxNew('zsUser2Documents');
 
-            if ($iCnt = $oDocumentsList->getCount()) {
+            if ($iCnt = $oUserToDocuments->getCount()) {
                 $this->_iCntPages = ceil($iCnt / $this->_documentsPerPage);
-
-                $oDocumentsList->getDocumentsList($this->getActPage() * $this->_documentsPerPage);
-                $this->_oDocumentsList = $oDocumentsList;
+                $this->_aDocumentsList = $oUserToDocuments->getUserDocuments($this->getActPage() * $this->_documentsPerPage);;
             }
         }
 
-        return $this->_oDocumentsList;
+        return $this->_aDocumentsList;
     }
 
-    public function checkExpiredDateForPayment($paymentDate, $paymentDuration)
+    public function removeFromFavouriteDocuments()
     {
-        $dueDate = strtotime('-' . $paymentDuration . 'month');
+        $aParams = oxConfig::getParameter('remove_doc');
+        $oUserToDocuments = oxNew('zsUser2Documents');
 
-        if (strtotime($paymentDate) < $dueDate) {
-            return true;
+        if ($oUserToDocuments->removeUserDocument($aParams)) {
+            $this->_blRemoveStatus = 1;
         }
+    }
+
+    public function getRemoveStatus()
+    {
+        return $this->_blRemoveStatus;
     }
 
     public function getPageNavigation()
@@ -49,29 +52,6 @@ class documents extends oxUBase
         return $this->_oPageNavigation;
     }
 
-    public function addFavouriteDocuments()
-    {
-        $aParams = oxConfig::getParameter('favourite_docs');
-
-        if (!$aParams) {
-            oxRegistry::get("oxUtilsView")->addErrorToDisplay('DOCS_EMPTY_FAVOURITE');
-            return false;
-        }
-
-        $oUserToDocuments = oxNew('zsUser2Documents');
-
-        if ($oUserToDocuments->save($aParams)) {
-            $this->_blSaveStatus = 1;
-        } else {
-            oxRegistry::get("oxUtilsView")->addErrorToDisplay('DOCS_FAILED_SAVE');
-        }
-    }
-
-    public function getSaveStatus()
-    {
-        return $this->_blSaveStatus;
-    }
-
     public function generatePageNavigation( $iPositionCount = 0 )
     {
         startProfile('generatePageNavigation');
@@ -81,7 +61,7 @@ class documents extends oxUBase
         $pageNavigation->NrOfPages = $this->_iCntPages;
         $iActPage = $this->getActPage();
         $pageNavigation->actPage   = $iActPage + 1;
-        $sUrl = preg_replace("/&amp;fnc=addFavouriteDocuments/", "", $this->generatePageNavigationUrl());
+        $sUrl = preg_replace("/&amp;fnc=removeFromFavouriteDocuments/", "", $this->generatePageNavigationUrl());
 
         if ( $iPositionCount == 0 || ($iPositionCount >= $pageNavigation->NrOfPages) ) {
             $iStartNo = 2;
