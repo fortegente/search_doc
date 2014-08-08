@@ -24,7 +24,20 @@ class zsaccount_documents extends Account
             }
         }
 
+        $this->_updateReviewDate();
+
         return $this->_aDocumentsList;
+    }
+
+    private function _updateReviewDate()
+    {
+        $oUserToDocuments = oxNew('zsUser2Documents');
+
+        if ($this->_aDocumentsList) {
+            foreach ($this->_aDocumentsList as $oDocument) {
+                $oUserToDocuments->updateReviewDate($oDocument->zsdocuments__oxid->value);
+            }
+        }
     }
 
     public function removeFromFavouriteDocuments()
@@ -121,5 +134,10 @@ class zsaccount_documents extends Account
         stopProfile('generatePageNavigation');
 
         return $pageNavigation;
+    }
+
+    public function isDocumentChangeFromLastVisit($lastSeenDate, $lastUpdateDate)
+    {
+        return strtotime($lastUpdateDate) > strtotime($lastSeenDate);
     }
 }

@@ -27,7 +27,7 @@
                     <th>[{oxmultilang ident="DOC_DECREE" }]</th>
                 </tr>
                 [{foreach from=$aDocuments item=document}]
-                    <tr>
+                    <tr [{if $oView->isDocumentChangeFromLastVisit($document->zsdocuments__last_seen->value, $document->zsdocuments__last_update->value)}]style="background-color:red"[{/if}]>
                         <td>
                             <input class="remove_doc" type="submit" name="remove_docs[]" value="x">
                             <input type="hidden" name="document_id" value="[{$document->zsdocuments__oxid->value}]">

@@ -10,9 +10,9 @@ class Documents_Main extends oxAdminDetails
         $soxId = $this->_aViewData["oxid"] = $this->getEditObjectId();
 
         if ( $soxId != "-1" && isset( $soxId ) ) {
-            $oUser = oxNew( "zsdocuments" );
-            $oUser->load( $soxId);
-            $this->_aViewData["edit"] =  $oUser;
+            $oDocument = oxNew( "zsdocuments" );
+            $oDocument->load( $soxId);
+            $this->_aViewData["edit"] =  $oDocument;
         }
 
         if (!$this->_allowAdminEdit($soxId)) {
@@ -41,13 +41,13 @@ class Documents_Main extends oxAdminDetails
                 return;
             }
 
-            if ($oDocuments->checkIfDocumentExists($aParams['zsdocuments__oxid'])) {
+            if ($oDocuments->exists($aParams['zsdocuments__oxid'])) {
                 $this->_sSaveError = 'DOC_EXISTS';
                 return;
             }
         }
 
-        $oDocuments->assign( $aParams);
+        $oDocuments->assign($aParams);
         $oDocuments->save();
         $this->setEditObjectId( $oDocuments->getId() );
     }

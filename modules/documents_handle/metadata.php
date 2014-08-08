@@ -10,7 +10,9 @@ $aModule = array(
     'version'      => '1.0.0',
     'author'       => 'Dmitry Martyniuk',
     'email'        => 'fortegente@gmail.com',
-    'extend'       => array(),
+    'extend'       => array(
+        'oxemail' => 'documents_handle/core/zsemail',
+    ),
       'files' => array(
           'Admin_Zsdocuments' => 'documents_handle/controllers/admin/admin_zsdocuments.php',
           'Documents_List'    => 'documents_handle/controllers/admin/documents_list.php',
