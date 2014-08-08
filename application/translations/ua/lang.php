@@ -25,5 +25,6 @@ $aLang = array(
     'DOCS_THANKS_SAVE_MESSAGE' => 'Документи успішно додані до вашого списку',
     'DOC_ACCOUNT_DOCUMENTS'    => 'Документи за якими ви слідкуете',
     'DOC_REMOVE_DOC'           => 'Видалити документ',
-    'DOCS_REMOVE_MESSAGE'      => 'Документ успішно видалений'
+    'DOCS_REMOVE_MESSAGE'      => 'Документ успішно видалений',
+    'DOC_SEARCH'               => 'Пошук'
 );

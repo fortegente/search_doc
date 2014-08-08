@@ -13,8 +13,23 @@ class documents extends oxUBase
 
     protected $_blSaveStatus = null;
 
+    public function render()
+    {
+        if ($searchParam = oxConfig::getParameter('searchparam')) {
+            $this->_aViewData["searchparam"] = $searchParam;
+        }
+
+        return parent::render();
+    }
+
     public function getDocumentsList()
     {
+        $sSearchParam = oxConfig::getParameter('searchparam');
+
+        if ($sSearchParam) {
+            return $this->_getSearchDocumentsList($sSearchParam);
+        }
+
         if ( $this->_oDocumentsList === null ) {
             $oDocumentsList = oxNew("zsDocumentslist");
             $oDocumentsList->init("zsDocuments");
@@ -28,6 +43,17 @@ class documents extends oxUBase
         }
 
         return $this->_oDocumentsList;
+    }
+
+    private function _getSearchDocumentsList($sSearchParam)
+    {
+        $oDocumentsList = oxNew("zsDocumentslist");
+        $oDocumentsList->init("zsDocuments");
+
+        $oDocumentsList->getSearchDocumentsList($sSearchParam, $this->getActPage() * $this->_documentsPerPage);
+        $this->_iCntPages = ceil($oDocumentsList->count() / $this->_documentsPerPage);
+
+        return $oDocumentsList;
     }
 
     public function checkExpiredDateForPayment($paymentDate, $paymentDuration)

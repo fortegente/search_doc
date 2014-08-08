@@ -5,6 +5,11 @@
     [{/if}]
     [{assign var="paymentExpired" value=$oView->checkExpiredDateForPayment($oxcmp_user->oxuser__zs_pay_date->value, $oxcmp_user->oxuser__zs_pay_duration->value) }]
     <h1 class="pageHead">[{ oxmultilang ident="LINKS" }]</h1>
+    <form action="[{$oViewConf->getSelfActionLink()}]" method="post">
+        <input type="hidden" name="cl" value="documents"/>
+        <input type="text" name="searchparam" value="[{$searchparam}]"/>
+        <input type="submit" value="[{oxmultilang ident="DOC_SEARCH"}]">
+    </form>
     <form action="[{$oViewConf->getSelfActionLink() }]" method="post">
         [{ $oViewConf->getHiddenSid() }]
         <input type="hidden" name="fnc" value="addFavouriteDocuments"/>
