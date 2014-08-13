@@ -19,6 +19,10 @@ class documents extends oxUBase
             $this->_aViewData["searchparam"] = $searchParam;
         }
 
+        if ($searchCategory = oxConfig::getParameter('search_category')) {
+            $this->_aViewData["search_category"] = $searchCategory;
+        }
+
         return parent::render();
     }
 
@@ -49,8 +53,9 @@ class documents extends oxUBase
     {
         $oDocumentsList = oxNew("zsDocumentslist");
         $oDocumentsList->init("zsDocuments");
+        $sSearchCategory = oxConfig::getParameter('search_category');
 
-        $oDocumentsList->getSearchDocumentsList($sSearchParam, $this->getActPage() * $this->_documentsPerPage);
+        $oDocumentsList->getSearchDocumentsList($sSearchParam, $sSearchCategory, $this->getActPage() * $this->_documentsPerPage);
         $this->_iCntPages = ceil($oDocumentsList->count() / $this->_documentsPerPage);
 
         return $oDocumentsList;

@@ -19,7 +19,9 @@ $aModule = array(
           'Documents_Main'    => 'documents_handle/controllers/admin/documents_main.php',
           'zsDocuments'       => 'documents_handle/models/zsDocuments.php',
           'zsDocumentslist'   => 'documents_handle/models/zsDocumentslist.php',
-          'zsUser2Documents'  => 'documents_handle/models/zsUser2Documents.php'
+          'zsUser2Documents'  => 'documents_handle/models/zsUser2Documents.php',
+          'zsCataloglist'   => 'documents_handle/models/zsCataloglist.php',
+          'zsCatalog'   => 'documents_handle/models/zsCatalog.php',
       ),
       'templates' => array(
           'admin_documents.tpl' => 'documents_handle/views/admin/tpl/admin_documents.tpl',

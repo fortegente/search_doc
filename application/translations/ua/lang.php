@@ -26,5 +26,10 @@ $aLang = array(
     'DOC_ACCOUNT_DOCUMENTS'    => 'Документи за якими ви слідкуете',
     'DOC_REMOVE_DOC'           => 'Видалити документ',
     'DOCS_REMOVE_MESSAGE'      => 'Документ успішно видалений',
-    'DOC_SEARCH'               => 'Пошук'
+    'DOC_SEARCH'               => 'Пошук',
+    'DOC_SEARCH_SIGN_AND_NAME' => 'В позначеннях та назвах НД',
+    'DOC_SEARCH_SIGN'          => 'Тільки в позначеннях НД',
+    'DOC_SEARCH_NAME'          => 'Тільки в назвах НД',
+    'DOC_SEARCH_TITLE_DOC'     => 'Пошук по категоріям',
+    'DOCS_CATALOG'             => 'Каталог'
 );

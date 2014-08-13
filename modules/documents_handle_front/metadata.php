@@ -12,9 +12,10 @@ $aModule = array(
     'email'        => 'fortegente@gmail.com',
     'extend'       => array(),
       'files' => array(
-          'documents' => 'documents_handle_front/controllers/documents.php'
+          'documents' => 'documents_handle_front/controllers/documents.php',
+          'catalog' => 'documents_handle_front/controllers/catalog.php'
       ),
       'templates' => array(
-          'documents.tpl' => 'documents_handle_front/views/tpl/documents.tpl',
+          'catalog.tpl' => 'documents_handle_front/views/tpl/catalog.tpl',
       )
 );
