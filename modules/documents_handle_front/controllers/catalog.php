@@ -3,22 +3,24 @@ class catalog extends oxUBase
 {
     protected $_sThisTemplate = 'catalog.tpl';
 
-    protected $_oCatalogList = null;
+    protected $_aCatalogList = null;
 
     public function getCatalogList()
     {
         if ( $this->_oCatalogList === null ) {
-            $oDocumentsList = oxNew("zsCataloglist");
-            $oDocumentsList->init("zsCatalog");
+            $oCatalogList = oxNew("zsCataloglist");
+            $oCatalogList->init("zsCatalog");
 
            // if ($iCnt = $oDocumentsList->getCount()) {
             //    $this->_iCntPages = ceil($iCnt / $this->_oCatalogList);
+            $group = oxConfig::getParameter('grp');
+            $subgroup = oxConfig::getParameter('pgrp');
+            $documents = oxConfig::getParameter('lstdssu');
 
-                $oDocumentsList->getCatalogList();
-                $this->_oDocumentsList = $oDocumentsList->_aArray;
+            $this->_aCatalogList = $oCatalogList->getCatalogList($group, $subgroup, $documents);
            // }
         }
 
-        return $this->_oCatalogList;
+        return $this->_aCatalogList;
     }
 }

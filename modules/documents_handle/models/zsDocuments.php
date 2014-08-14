@@ -22,7 +22,7 @@ class zsDocuments extends oxBase
         return false;
     }
 
-    public function onChange($sAction)
+    public function onChange($sAction, $sOXID = null)
     {
         if ($sAction == ACTION_UPDATE && $this->_documentWasChanged()) {
             $this->_sendNotificationToUser();
