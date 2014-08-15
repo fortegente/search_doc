@@ -31,5 +31,9 @@ $aLang = array(
     'DOC_SEARCH_SIGN'          => 'Тільки в позначеннях НД',
     'DOC_SEARCH_NAME'          => 'Тільки в назвах НД',
     'DOC_SEARCH_TITLE_DOC'     => 'Пошук по категоріям',
-    'DOCS_CATALOG'             => 'Каталог'
+    'DOCS_CATALOG'             => 'Каталог',
+    'DOC_SUB_IS_CATALOG'       => 'Груп',
+    'DOC_SUB_IS_SUBCATALOG'    => 'Підгруп',
+    'DOC_SUB_IS_DOCUMENTS'     => 'Документів',
+    'DOCS_NO_CATEGORY'         => 'З даними параметрами нічого не знайдено'
 );

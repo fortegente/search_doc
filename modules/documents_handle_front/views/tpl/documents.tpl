@@ -5,17 +5,19 @@
     [{/if}]
     [{assign var="paymentExpired" value=$oView->checkExpiredDateForPayment($oxcmp_user->oxuser__zs_pay_date->value, $oxcmp_user->oxuser__zs_pay_duration->value) }]
     <h1 class="pageHead">[{ oxmultilang ident="LINKS" }]</h1>
-    <form action="[{$oViewConf->getSelfActionLink()}]" method="post">
-        <input type="hidden" name="cl" value="documents"/>
-        <input type="text" name="searchparam" value="[{$searchparam}]"/>
-        <select name="search_category">
-            <option value="0" [{if $search_category == 0}]selected[{/if}]>[{oxmultilang ident="DOC_SEARCH_SIGN_AND_NAME" }]</option>
-            <option value="1" [{if $search_category == 1}]selected[{/if}]>[{oxmultilang ident="DOC_SEARCH_SIGN" }]</option>
-            <option value="2" [{if $search_category == 2}]selected[{/if}]>[{oxmultilang ident="DOC_SEARCH_NAME" }]</option>
-            <option value="3" [{if $search_category == 3}]selected[{/if}]>[{oxmultilang ident="DOC_SEARCH_TITLE_DOC" }]</option>
-        </select>
-        <input type="submit" value="[{oxmultilang ident="DOC_SEARCH"}]">
-    </form>
+    [{if !$filter}]
+        <form action="[{$oViewConf->getSelfActionLink()}]" method="post">
+            <input type="hidden" name="cl" value="documents"/>
+            <input type="text" name="searchparam" value="[{$searchparam}]"/>
+            <select name="search_category">
+                <option value="0" [{if $search_category == 0}]selected[{/if}]>[{oxmultilang ident="DOC_SEARCH_SIGN_AND_NAME" }]</option>
+                <option value="1" [{if $search_category == 1}]selected[{/if}]>[{oxmultilang ident="DOC_SEARCH_SIGN" }]</option>
+                <option value="2" [{if $search_category == 2}]selected[{/if}]>[{oxmultilang ident="DOC_SEARCH_NAME" }]</option>
+                <option value="3" [{if $search_category == 3}]selected[{/if}]>[{oxmultilang ident="DOC_SEARCH_TITLE_DOC" }]</option>
+            </select>
+            <input type="submit" value="[{oxmultilang ident="DOC_SEARCH"}]">
+        </form>
+    [{/if}]
     <form action="[{$oViewConf->getSelfActionLink() }]" method="post">
         [{ $oViewConf->getHiddenSid() }]
         <input type="hidden" name="fnc" value="addFavouriteDocuments"/>

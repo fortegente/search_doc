@@ -16,6 +16,7 @@ $aModule = array(
           'catalog' => 'documents_handle_front/controllers/catalog.php'
       ),
       'templates' => array(
-          'catalog.tpl' => 'documents_handle_front/views/tpl/catalog.tpl',
+          'documents.tpl' => 'documents_handle_front/views/tpl/documents.tpl',
+          'catalog.tpl' => 'documents_handle_front/views/tpl/catalog.tpl'
       )
 );

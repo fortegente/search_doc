@@ -6,18 +6,33 @@ class zsDocumentslist extends oxList
         parent::__construct( 'zsdocuments');
     }
 
-    public function getDocumentsList($iFrom = 0, $iLimit = 20)
+    public function getDocumentsList($iFrom = 0, $iLimit = 20, $filter = null)
     {
         if ($iLimit) {
             $this->setSqlLimit($iFrom, $iLimit);
         }
 
-        return $this->getList();
+        $oListObject =$this->getBaseObject();
+        $sFieldList = $oListObject->getSelectFields();
+        $sQ = "select $sFieldList from " . $oListObject->getViewName();
+        if ($filter) {
+            $sQ .= " where oxid = '" . $filter . "'";
+        }
+        $this->selectString($sQ);
+
+        return $this;
     }
 
-    public function getCount()
+    public function getCount($sFilterParam = null)
     {
-        return $this->getList()->count();
+        $oDb = oxDb::getDb();
+        $sQ = "select COUNT(*) from zsdocuments";
+
+        if ($sFilterParam) {
+            $sQ .= " where oxid = '" . $sFilterParam . "'";
+        }
+
+        return $oDb->getOne($sQ);
     }
 
     public function getSearchDocumentsList($sSearchParam, $sSearchCategory, $iFrom = 0, $iLimit = 20)
