@@ -200,6 +200,7 @@
             <SUBMENU id="mxtools" cl="tools" list="tools_list" rights="malladmin" disableForDemoShop="1" >
                 <TAB id="tbcltools_main" cl="tools_main" disableForDemoShop="1" />
             </SUBMENU>
+            <SUBMENU id="mxgenimp" cl="genimport"></SUBMENU>
         </MAINMENU>
     </OXMENU>
 </OX>

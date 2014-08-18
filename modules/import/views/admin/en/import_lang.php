@@ -1,4 +1,7 @@
 <?php
+$sLangName  = 'English';
+
 $aLang = array(
-    'tbclorder_import' => 'Import',
+    'charset'          => 'UTF-8',
+    'tbclorder_import' => 'Імпорт документів',
 );

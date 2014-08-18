@@ -16,7 +16,7 @@ $aModule = array(
       ),
       'templates' => array(
           'import.tpl' => 'import/views/admin/tpl/import.tpl'
-      ),
+      )
 //
 //    'blocks' => array(
 //        array('template' => 'layout/page.tpl',             'block'=>'layout_page_vatinclude',               'file'=>'views/azure/blocks/theme_switch_link.tpl'),
