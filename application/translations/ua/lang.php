@@ -35,5 +35,13 @@ $aLang = array(
     'DOC_SUB_IS_CATALOG'       => 'Груп',
     'DOC_SUB_IS_SUBCATALOG'    => 'Підгруп',
     'DOC_SUB_IS_DOCUMENTS'     => 'Документів',
-    'DOCS_NO_CATEGORY'         => 'З даними параметрами нічого не знайдено'
+    'DOCS_NO_CATEGORY'         => 'З даними параметрами нічого не знайдено',
+    'DOCS_HOME'                => 'Головна',
+    'DOCS_ABOUT'               => 'Про проект',
+    'DOCS_NEWS'                => 'Новини',
+    'DOCS_LINKS'               => 'Корисні посилання',
+    'DOCS_REGISTER'            => 'Зареєструватись',
+    'DOCS_MY_BASE'             => 'Мій Standart-info',
+    'DOCS_PREVIOUS'            => 'Попередня',
+    'DOCS_NEXT'                => 'Наступна',
 );

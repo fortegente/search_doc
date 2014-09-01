@@ -108,7 +108,7 @@ class documents extends oxUBase
         return $this->_blSaveStatus;
     }
 
-    public function generatePageNavigation( $iPositionCount = 0 )
+    public function generatePageNavigation($iPositionCount = 6)
     {
         startProfile('generatePageNavigation');
 

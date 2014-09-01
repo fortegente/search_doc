@@ -7,7 +7,14 @@
     [{/if}]
 [{assign var="oxcmp_categories" value=$oxcmp_categories }]
 <ul id="navigation" class="sf-menu">
-    <li [{if $homeSelected == 'true' }]class="current"[{/if}]><a [{if $homeSelected == 'true'}]class="current"[{/if}] href="[{$oViewConf->getHomeLink()}]">[{oxmultilang ident="HOME"}]</a></li>
+    <li [{if $homeSelected == 'true' }]class="current"[{/if}]><a [{if $homeSelected == 'true'}]class="current"[{/if}] href="[{$oViewConf->getHomeLink()}]">[{oxmultilang ident="DOCS_HOME"}]</a></li>
+    [{oxifcontent ident="oximpressum" object="_cont"}]
+        <li><a href="[{$_cont->getLink() }]">[{ $_cont->oxcontents__oxtitle->value }]</a></li>
+    [{/oxifcontent}]
+    <li [{if $homeSelected == 'true' }]class="current"[{/if}]><a [{if $homeSelected == 'true'}]class="current"[{/if}] href="[{$oViewConf->getHomeLink()}]">[{oxmultilang ident="DOCS_NEWS"}]</a></li>
+    <li [{if $homeSelected == 'true' }]class="current"[{/if}]><a [{if $homeSelected == 'true'}]class="current"[{/if}] href="[{$oViewConf->getHomeLink()}]">[{oxmultilang ident="DOCS_LINKS"}]</a></li>
+    <li [{if $homeSelected == 'true' }]class="current"[{/if}]><a [{if $homeSelected == 'true'}]class="current"[{/if}] href="[{$oViewConf->getHomeLink()}]">[{oxmultilang ident="DOCS_REGISTER"}]</a></li>
+    <li [{if $homeSelected == 'true' }]class="current"[{/if}]><a [{if $homeSelected == 'true'}]class="current"[{/if}] href="[{$oViewConf->getHomeLink()}]">[{oxmultilang ident="DOCS_MY_BASE"}]</a></li>
     <li [{if $homeSelected == 'true' }]class="current"[{/if}]><a [{if $homeSelected == 'true'}]class="current"[{/if}] href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=documents" }]">[{oxmultilang ident="DOCS_BASE"}]</a></li>
     <li [{if $homeSelected == 'true' }]class="current"[{/if}]><a [{if $homeSelected == 'true'}]class="current"[{/if}] href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=catalog" }]">[{oxmultilang ident="DOCS_CATALOG"}]</a></li>
 </ul>

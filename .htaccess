@@ -15,6 +15,7 @@
 Options +FollowSymLinks
 RewriteEngine On
 RewriteBase /
+RewriteRule ^ua/(.*)$ $1
 
 RewriteCond %{REQUEST_URI}     config\.inc\.php [NC]
 RewriteRule ^config\.inc\.php  index\.php       [R=301,L]

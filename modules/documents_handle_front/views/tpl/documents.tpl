@@ -6,7 +6,7 @@
     [{assign var="paymentExpired" value=$oView->checkExpiredDateForPayment($oxcmp_user->oxuser__zs_pay_date->value, $oxcmp_user->oxuser__zs_pay_duration->value) }]
     <h1 class="pageHead">[{ oxmultilang ident="LINKS" }]</h1>
     [{if !$filter}]
-        <form action="[{$oViewConf->getSelfActionLink()}]" method="post">
+        <form action="[{$oViewConf->getSelfActionLink()}]" method="post" id="search-form">
             <input type="hidden" name="cl" value="documents"/>
             <input type="text" name="searchparam" value="[{$searchparam}]"/>
             <select name="search_category">
@@ -22,10 +22,10 @@
         [{ $oViewConf->getHiddenSid() }]
         <input type="hidden" name="fnc" value="addFavouriteDocuments"/>
         <input type="hidden" name="cl" value="documents"/>
-        <table>
+        <table id="documents_table">
             <tr>
                 [{if $oxcmp_user && !$paymentExpired}]
-                    <th>[{oxmultilang ident="DOC_ADD_DOC" }]</th>
+                    <th></th>
                 [{/if}]
                 <th>[{oxmultilang ident="DOC_PRIMARY_NUMBER" }]</th>
                 <th>[{oxmultilang ident="DOC_MARKING" }]</th>
@@ -66,7 +66,9 @@
                 </tr>
             [{/foreach}]
         </table>
-        <input type="submit" value="[{oxmultilang ident="DOC_ADD_TO_ACCOUNT" }]">
+        [{if $oxcmp_user && !$paymentExpired}]
+            <input type="submit" value="[{oxmultilang ident="DOC_ADD_TO_ACCOUNT" }]">
+        [{/if}]
     </form>
     [{include file="widget/locator/listlocator.tpl" locator=$oView->getPageNavigation()}]
 [{/capture}]
