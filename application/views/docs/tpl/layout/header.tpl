@@ -5,6 +5,7 @@
     [{oxid_include_widget cl="oxwCookieNote" _parent=$oView->getClassName() nocookie=1}]
 [{/if}]
 <div id="header" class="clear">
+    <a id="logo" href="[{$oViewConf->getHomeLink()}]"><img src="[{$oViewConf->getImageUrl('logo-icon.png')}]""></a>
   [{if $oxcmp_user || $oView->getCompareItemCount() || $Errors.loginBoxErrors}]
       [{assign var="blAnon" value=0}]
       [{assign var="force_sid" value=$oView->getSidForWidget()}]
