@@ -1,10 +1,22 @@
 [{capture append="oxidBlock_content"}]
+    <div id="partner-info-block">
+        <h2>STANDART-INFO ПАРТНЕР</h2>
+        <span>
+            Гостьовий доступ
+            Standart-info партнер не потребує реєстрації та передплати!
+            Ви користуєтесь програмою пошуку інформації про нормативні документи та отримуєте інформацію про:</br>
+            <span>
+                - позначення нормативного документа;</br>
+                - назву;</br>
+                - стан (діє, не діє), а також користуватись іншою інформацією розміщеною на сайті.</br>
+            </span>
+        </span>
+    </div>
     [{if $oView->getSaveStatus() }]
         [{assign var="_statusMessage" value="DOCS_THANKS_SAVE_MESSAGE"|oxmultilangassign:$oxcmp_shop->oxshops__oxname->value}]
         [{include file="message/notice.tpl" statusMessage=$_statusMessage}]
     [{/if}]
     [{assign var="paymentExpired" value=$oView->checkExpiredDateForPayment($oxcmp_user->oxuser__zs_pay_date->value, $oxcmp_user->oxuser__zs_pay_duration->value) }]
-    <h1 class="pageHead">[{ oxmultilang ident="LINKS" }]</h1>
     [{if !$filter}]
         <form action="[{$oViewConf->getSelfActionLink()}]" method="post" id="search-form">
             <input type="hidden" name="cl" value="documents"/>
