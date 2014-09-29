@@ -1073,11 +1073,6 @@ h3.blockHead {
     margin-top: -2px;
 }
 
-div.lineBlock {
-    padding: 5px 0;
-    border-bottom: 5px solid #eceff0;
-}
-
 .viewAllHover {
     padding: 1px 10px 3px 8px;
     position: relative;
@@ -4079,11 +4074,11 @@ span.verificationCode {
 }
 
 .notice {
-    font-size: 11px;
+    font-size: 19px;
     font-style: italic;
-    border-top: 1px solid #eceff0;
     margin-top: 10px;
-    padding: 5px 0;
+    background-color: rgb(68, 202, 132);
+    padding: 12px;
 }
 
 .inlineForm .notice {
@@ -4884,6 +4879,9 @@ td.alignTop{
     float: left;
     width: 50%;
 }
+.accountLoginView {
+    padding: 10px;
+}
 
 /* --- right corner message ---------------- */
 #incVatMessage{
@@ -5480,7 +5478,7 @@ a.downloadableFile.pending {
     color: #464646;
     line-height: 20px;
 }
-#partner-info-block {
+#header-info-block {
     padding: 12px;
     margin: 7px 0 20px 0;
     color: #464646;
@@ -5490,14 +5488,25 @@ a.downloadableFile.pending {
     box-shadow: 3px 3px 14px #888887;
     text-indent: 10px;
 }
-#partner-info-block h2 {
+#header-info-block h2 {
     text-shadow: 2px 0px 3px rgba(82, 122, 149, 0.66);
     font-size: 24px;
+    margin: 0;
 }
-#partner-info-block span {
+#header-info-block span {
     text-indent: 10px;
     display: block;
+    margin-top: 10px;
 }
-#partner-info-block span span {
+#header-info-block span span {
     padding-left: 15px;
+    margin-top: 0px;
+}
+#documents_table .remove_doc {
+    cursor: pointer;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    padding-top: 0px;
+    font-size: 21px;
 }

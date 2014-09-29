@@ -1,9 +1,14 @@
 [{capture append="oxidBlock_content"}]
+    <div id="header-info-block">
+        <h2>Мій STANDART-INFO</h2>
+        <span>
+            На даній сторінці ви можете
+        </span>
+    </div>
     [{if $oView->getRemoveStatus() }]
         [{assign var="_statusMessage" value="DOCS_REMOVE_MESSAGE"|oxmultilangassign:$oxcmp_shop->oxshops__oxname->value}]
         [{include file="message/notice.tpl" statusMessage=$_statusMessage}]
     [{/if}]
-    <h1 class="pageHead">[{ oxmultilang ident="CHANGE_PASSWORD" }]</h1>
     [{assign var=aDocuments value=$oView->getUserDocumentsList()}]
 
     [{if count($aDocuments) > 0}]
@@ -11,7 +16,7 @@
             [{$oViewConf->getHiddenSid() }]
             <input type="hidden" name="fnc" value="removeFromFavouriteDocuments"/>
             <input type="hidden" name="cl" value="zsaccount_documents"/>
-            <table>
+            <table id="documents_table">
                 <tr>
                     <th>[{oxmultilang ident="DOC_REMOVE_DOC" }]</th>
                     <th>[{oxmultilang ident="DOC_PRIMARY_NUMBER" }]</th>
@@ -27,7 +32,7 @@
                     <th>[{oxmultilang ident="DOC_DECREE" }]</th>
                 </tr>
                 [{foreach from=$aDocuments item=document}]
-                    <tr [{if $oView->isDocumentChangeFromLastVisit($document->zsdocuments__last_seen->value, $document->zsdocuments__last_update->value)}]style="background-color:red"[{/if}]>
+                    <tr [{if $oView->isDocumentChangeFromLastVisit($document->zsdocuments__last_seen->value, $document->zsdocuments__last_update->value)}]style="background-color:rgb(255, 132, 132)"[{/if}]>
                         <td>
                             <input class="remove_doc" type="submit" name="remove_docs[]" value="x">
                             <input type="hidden" name="document_id" value="[{$document->zsdocuments__oxid->value}]">

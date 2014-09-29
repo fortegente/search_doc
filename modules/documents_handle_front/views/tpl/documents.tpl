@@ -1,5 +1,5 @@
 [{capture append="oxidBlock_content"}]
-    <div id="partner-info-block">
+    <div id="header-info-block">
         <h2>STANDART-INFO ПАРТНЕР</h2>
         <span>
             Гостьовий доступ

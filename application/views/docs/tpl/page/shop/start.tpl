@@ -5,7 +5,7 @@
         <p>Мы працюємо - ви користуєтесь.</p>
         <p>"СТАНДАРТ-ІНФО" лідер на ринку послуг інформаційного забезпечення в сфері стандартизації.</p>
         <h1>Інформаційно-пошукова система онлайн</h1>
-        <a href="#">Вхід</a>
+        <a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=account"}]">Вхід</a>
     </div>
     <div class="homebox">
         <h2><b>STANDART-INFO</b></h2>
