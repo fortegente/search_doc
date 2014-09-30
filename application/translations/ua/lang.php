@@ -44,5 +44,6 @@ $aLang = array(
     'DOCS_MY_BASE'             => 'Мій Standart-info',
     'DOCS_PREVIOUS'            => 'Попередня',
     'DOCS_NEXT'                => 'Наступна',
-    'DOCS_SEARCH_EMPTY'        => 'Не знайдено жодного документу.'
+    'DOCS_SEARCH_EMPTY'        => 'Не знайдено жодного документу.',
+    'LATEST_NEWS_NOACTIVENEWS' => 'Немає жодної новини на даний момент.'
 );
