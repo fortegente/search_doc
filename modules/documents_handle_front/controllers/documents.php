@@ -42,28 +42,33 @@ class documents extends oxUBase
             $oDocumentsList = oxNew("zsDocumentslist");
             $oDocumentsList->init("zsDocuments");
             $sFilterParam = oxConfig::getParameter('nd');
+            $iCnt = $oDocumentsList->getCount($sFilterParam);
 
-            if ($iCnt = $oDocumentsList->getCount($sFilterParam)) {
+            if ($iCnt > 0) {
                 $this->_iCntPages = ceil($iCnt / $this->_documentsPerPage);
 
                 $oDocumentsList->getDocumentsList($this->getActPage() * $this->_documentsPerPage, 20, $sFilterParam);
                 $this->_oDocumentsList = $oDocumentsList;
+
+                return $this->_oDocumentsList;
             }
         }
-
-        return $this->_oDocumentsList;
     }
 
     private function _getSearchDocumentsList($sSearchParam)
     {
-        $oDocumentsList = oxNew("zsDocumentslist");
-        $oDocumentsList->init("zsDocuments");
-        $sSearchCategory = oxConfig::getParameter('search_category');
+        if (!empty($sSearchParam)) {
+            $oDocumentsList = oxNew("zsDocumentslist");
+            $oDocumentsList->init("zsDocuments");
+            $sSearchCategory = oxConfig::getParameter('search_category');
 
-        $oDocumentsList->getSearchDocumentsList($sSearchParam, $sSearchCategory, $this->getActPage() * $this->_documentsPerPage);
-        $this->_iCntPages = ceil($oDocumentsList->count() / $this->_documentsPerPage);
+            $oDocumentsList->getSearchDocumentsList($sSearchParam, $sSearchCategory, $this->getActPage() * $this->_documentsPerPage);
+            if ($oDocumentsList->count() > 0) {
+                $this->_iCntPages = ceil($oDocumentsList->count() / $this->_documentsPerPage);
 
-        return $oDocumentsList;
+                return $oDocumentsList;
+            }
+        }
     }
 
     public function checkExpiredDateForPayment($paymentDate, $paymentDuration)

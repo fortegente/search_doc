@@ -44,4 +44,5 @@ $aLang = array(
     'DOCS_MY_BASE'             => 'Мій Standart-info',
     'DOCS_PREVIOUS'            => 'Попередня',
     'DOCS_NEXT'                => 'Наступна',
+    'DOCS_SEARCH_EMPTY'        => 'Не знайдено жодного документу.'
 );
