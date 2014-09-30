@@ -5494,11 +5494,18 @@ a.downloadableFile.pending {
     display: inline;
     font-size: 13px;
 }
-#content .cmsContent {
+#content .cmsContent, .news_block {
     padding: 10px;
     font-size: 17px;
     color: #464646;
     line-height: 20px;
+}
+.news_block h1 {
+    margin-bottom: 10px;
+}
+.news_block span.content {
+    text-indent: 20px;
+    display: block;
 }
 #header-info-block {
     padding: 12px;
