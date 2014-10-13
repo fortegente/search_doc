@@ -11,8 +11,10 @@ $aModule = array(
     'author'       => 'Dmitry Martyniuk',
     'email'        => 'fortegente@gmail.com',
     'extend'       => array(
-        'user_main'           => 'user_handle/controllers/admin/zsuser_main',
-        'zsaccount_documents' => 'user_handle/controllers/zsaccount_documents'
+        'user_main'           => 'user_handle/controllers/admin/zsuser_main'
+    ),
+    'files' => array(
+        'zsaccount_documents' => 'user_handle/controllers/zsaccount_documents.php'
     ),
     'templates' => array(
         'account_documents.tpl' => 'user_handle/views/tpl/account_documents.tpl',

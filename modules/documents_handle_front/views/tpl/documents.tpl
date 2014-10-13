@@ -39,13 +39,19 @@
             [{ $oViewConf->getHiddenSid() }]
             <input type="hidden" name="fnc" value="addFavouriteDocuments"/>
             <input type="hidden" name="cl" value="documents"/>
+            [{if $oxcmp_user && !$paymentExpired}]
+                <input class="add_documents top" type="submit" value="[{oxmultilang ident="DOC_ADD_TO_ACCOUNT" }]">
+            [{/if}]
+            [{if $searchparam}]
+                <a class="back_button" href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=documents"}]">[{oxmultilang ident="BACK_TO_DOC" }]</a>
+            [{/if}]
             <table id="documents_table">
                 <tr>
                     [{if $oxcmp_user && !$paymentExpired}]
-                        <th></th>
+                        <th><input type="checkbox" class="check_all"></th>
                     [{/if}]
-                    <th>[{oxmultilang ident="DOC_PRIMARY_NUMBER" }]</th>
                     <th>[{oxmultilang ident="DOC_MARKING" }]</th>
+                    <th>[{oxmultilang ident="DOC_PRIMARY_NUMBER" }]</th>
                     <th>[{oxmultilang ident="DOC_NAME" }]</th>
                     [{if $oxcmp_user && !$paymentExpired}]
                         <th>[{oxmultilang ident="DOC_CHANGING" }]</th>
@@ -65,8 +71,8 @@
                         [{if $oxcmp_user && !$paymentExpired && $oxcmp_user->oxuser__oxrights->value == 'user'}]
                             <td><input type="checkbox" name="favourite_docs[]" value="[{$document->zsdocuments__oxid->value}]"></td>
                         [{/if}]
-                        <td>[{$document->zsdocuments__oxid->value}]</td>
                         <td>[{$document->zsdocuments__marking->value}]</td>
+                        <td>[{$document->zsdocuments__oxid->value}]</td>
                         <td>[{$document->zsdocuments__name->value}]</td>
                         [{if $oxcmp_user && !$paymentExpired}]
                             <td>[{$document->zsdocuments__changing->value}]</td>
@@ -84,13 +90,17 @@
                 [{/foreach}]
             </table>
             [{if $oxcmp_user && !$paymentExpired}]
-                <input type="submit" value="[{oxmultilang ident="DOC_ADD_TO_ACCOUNT" }]">
+                <input class="add_documents" type="submit" value="[{oxmultilang ident="DOC_ADD_TO_ACCOUNT" }]">
+            [{/if}]
+            [{if $searchparam}]
+                <a class="back_button last" href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=documents"}]">[{oxmultilang ident="BACK_TO_DOC" }]</a>
             [{/if}]
         </form>
         [{include file="widget/locator/listlocator.tpl" locator=$oView->getPageNavigation()}]
     [{else}]
         [{assign var="customMessage" value="DOCS_SEARCH_EMPTY"|oxmultilangassign}]
         [{include file="message/errors.tpl" customMessage=$customMessage}]
+        <a class="back_button last" href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=documents"}]">[{oxmultilang ident="BACK_TO_DOC" }]</a>
     [{/if}]
 [{/capture}]
 [{include file="layout/page.tpl" sidebar="Left"}]
@@ -105,5 +115,26 @@
 
             return false;
         }
-    })
+    });
+
+    jQuery('.check_all').click(function() {
+        if (jQuery(this).is(":checked")) {
+            jQuery('[name^="favourite_docs"]').each(function(i, el) {
+                jQuery(el).attr("checked",true);
+            })
+        } else {
+            jQuery('[name^="favourite_docs"]').each(function(i, el) {
+                jQuery(el).attr("checked", false);
+            })
+        }
+
+    });
+
+    jQuery('input[type="checkbox"]').click(function() {
+        if (jQuery(this).is(":checked")) {
+            jQuery('.add_documents').show();
+        } else {
+            jQuery('.add_documents').hide();
+        }
+    });
 </script>

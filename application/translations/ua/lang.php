@@ -8,7 +8,7 @@ $aLang = array(
     'DOC_MARKING'              => 'Позначення НД',
     'DOC_NAME'                 => 'Назва НД',
     'DOC_CHANGING'             => 'Зміна НД',
-    'DOC_PAGES'                => 'Кількість сторінок',
+    'DOC_PAGES'                => 'К-ть сторінок',
     'DOC_STATE'                => 'Стан',
     'DOC_CANCEL'               => 'На заміну / зі скасуванням',
     'DOC_REPLACE'              => 'Позначення НД яким замінюється',
@@ -45,5 +45,6 @@ $aLang = array(
     'DOCS_PREVIOUS'            => 'Попередня',
     'DOCS_NEXT'                => 'Наступна',
     'DOCS_SEARCH_EMPTY'        => 'Не знайдено жодного документу.',
-    'LATEST_NEWS_NOACTIVENEWS' => 'Немає жодної новини на даний момент.'
+    'LATEST_NEWS_NOACTIVENEWS' => 'Немає жодної новини на даний момент.',
+    'BACK_TO_DOC'              => 'Повернутись на перелік документів'
 );

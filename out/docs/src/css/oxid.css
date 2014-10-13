@@ -847,7 +847,7 @@ h3.lightHead {
     text-decoration: underline;
 }
 
-.specBox .deliveryInfo a:hover {
+.specBox .deliveryInfo a:hover, a.back_button:hover {
     text-decoration: none;
 }
 
@@ -5422,7 +5422,7 @@ a.downloadableFile.pending {
     font-size: 15px;
 }
 #documents_table td, #documents_table th {
-    padding: 8px;
+    padding: 2px;
 }
 #documents_table td, #documents_table th {
     text-align: center;
@@ -5434,7 +5434,7 @@ a.downloadableFile.pending {
 #search-form {
     margin-bottom: 16px;
 }
-#search-form input[type='submit'] {
+#search-form input[type='submit'], input.add_documents {
     cursor: pointer;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
@@ -5453,7 +5453,42 @@ a.downloadableFile.pending {
     height: 27px;
     margin-left: 10px;
 }
-#search-form input[type='submit']:hover {
+input.add_documents {
+    width: 250px;
+    display: none;
+    margin-left: 0px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+input.add_documents.top {
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+a.back_button {
+    display: inline-block;
+    margin-left: 25px;
+    background: rgb(210, 210, 210);
+    height: 23px;
+    padding: 3px 10px;
+    line-height: 24px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 2px #3d5d47;
+    -moz-box-shadow: 0 2px #3d5d47;
+    box-shadow: 0 2px #3d5d47;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    font-weight: bold;
+}
+a.back_button.last {
+    margin-top: 20px;
+}
+input.add_documents {
+    margin-top: 20px;
+}
+#search-form input[type='submit']:hover, input.add_documents:hover {
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
     border-radius: 6px;
