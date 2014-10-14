@@ -31,7 +31,7 @@
             Для зареєстрованих користувачів.
         </div>
         <div class="overlay">
-            <a href="#">Переглянути</a>
+            <a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=zsexpert"}]">Переглянути</a>
         </div>
     </div>
     <div class="homebox last">
@@ -51,7 +51,7 @@
             з проплаченим доступом.
         </div>
         <div class="overlay">
-            <a href="#">Переглянути</a>
+            <a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=zsprofessional"}]">Переглянути</a>
         </div>
     </div>
 [{/capture}]
