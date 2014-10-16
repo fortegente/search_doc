@@ -995,12 +995,15 @@ h3.lightHead {
 }
 
 .textbox, input[type="text"] {
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    height: 25px;
+    width: 300px;
+    font-size: 15px;
     border: 1px solid #8c8989;
     background: #fff;
     padding: 1px 5px;
-    height: 15px;
-    line-height: 14px;
-    font-size: 11px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -3883,12 +3886,12 @@ dl.review .param {
 
 /* --- Forms, Validation ---------------------------- */
 .form {
-    width: 354px;
+    width: 600px;
 }
 
 .form li {
     padding: 5px 0;
-    width: 354px;
+    width: 600px;
 }
 
 .form li.formSubmit {
@@ -3906,6 +3909,8 @@ dl.review .param {
 .form label,
 .form input {
     float: left;
+    color: #464646;;
+    font-size: 15px;
 }
 
 .form .oxDate select {
@@ -3916,11 +3921,6 @@ dl.review .param {
 .form .oxDate .innerLabel {
     margin-top: 1px;
     text-transform: none;
-}
-
-.form input[type="password"],
-.form input[type="text"] {
-    width: 190px;
 }
 
 .form select[data-fieldsize="normal"] {
@@ -3992,8 +3992,8 @@ span.verificationCode {
 }
 
 .form label {
-    width: 140px;
-    padding-right: 10px;
+    width: 180px;
+    padding-right: 50px;
     line-height: 18px;
 }
 
@@ -5416,6 +5416,7 @@ a.downloadableFile.pending {
 }
 #documents_table {
     box-shadow: 6px 6px 14px #888888;
+    clear: both;
 }
 #documents_table, #documents_table tr, #documents_table th, #documents_table td {
     border: 2px solid #527a95;
@@ -5434,7 +5435,7 @@ a.downloadableFile.pending {
 #search-form {
     margin-bottom: 16px;
 }
-#search-form input[type='submit'], input.add_documents {
+#search-form input[type='submit'], input.add_documents, #loginButton, #accUserSaveTop {
     cursor: pointer;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
@@ -5452,6 +5453,9 @@ a.downloadableFile.pending {
     width: 100px;
     height: 27px;
     margin-left: 10px;
+}
+button#accUserSaveTop.register {
+    width: 155px;
 }
 input.add_documents {
     width: 250px;
@@ -5488,7 +5492,7 @@ a.back_button.last {
 input.add_documents {
     margin-top: 20px;
 }
-#search-form input[type='submit']:hover, input.add_documents:hover {
+#search-form input[type='submit']:hover, input.add_documents:hover, #loginButton:hover, #accUserSaveTop:hover {
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
     border-radius: 6px;
@@ -5580,4 +5584,47 @@ input.add_documents {
 }
 #category_list li {
     list-style: none;
+}
+.link-wrapper {
+    text-align: center;
+}
+.link-wrapper a {
+    margin-right: 50px;
+}
+.prices-info-block {
+    color: #464646 !important;
+}
+.prices-info-block h1, .prices-info-block h4, .prices-info-block h5 {
+    text-align: center;
+}
+.prices-info-block h1 {
+    font-size: 27px;
+    margin-bottom: 20px;
+}
+.prices-info-block h4 {
+    font-size: 19px;
+    margin-bottom: 0;
+}
+.prices-info-block h5 {
+    font-size: 17px;
+    color: #898787;
+}
+.prices-info-block tr:nth-child(even) {
+    background: #9FB7C7;
+}
+.prices-info-block tr td {
+    padding: 15px;
+}
+.prices-info-block table {
+    box-shadow: 6px 6px 14px #888888;
+    color: #000 !important;
+    width: 100%;
+    border: 1px solid #999999;
+    font-size: 19px;
+}
+.back_button.account-back {
+    margin-top: 7px;
+}
+.back_button.account-back.logout {
+    float: right;
 }

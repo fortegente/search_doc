@@ -16,6 +16,8 @@
             [{$oViewConf->getHiddenSid() }]
             <input type="hidden" name="fnc" value="removeFromFavouriteDocuments"/>
             <input type="hidden" name="cl" value="zsaccount_documents"/>
+             <a class="back_button account-back" href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=documents"}]">[{oxmultilang ident="BACK_TO_DOC" }]</a>
+             <a class="back_button account-back logout" href="[{ $oViewConf->getLogoutLink() }]">[{oxmultilang ident="LOGOUT" }]</a>
             <table id="documents_table">
                 <tr>
                     <th>[{oxmultilang ident="DOC_REMOVE_DOC" }]</th>
@@ -53,6 +55,7 @@
             </table>
              <input type="hidden" name="remove_doc" value="" />
         </form>
+        <a class="back_button account-back" href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=documents"}]">[{oxmultilang ident="BACK_TO_DOC" }]</a>
         [{include file="widget/locator/listlocator.tpl" locator=$oView->getPageNavigation()}]
     [{/if}]
 <script>
