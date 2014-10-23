@@ -5417,13 +5417,14 @@ a.downloadableFile.pending {
 #documents_table {
     box-shadow: 6px 6px 14px #888888;
     clear: both;
+    width: 100%;
 }
 #documents_table, #documents_table tr, #documents_table th, #documents_table td {
     border: 2px solid #527a95;
     font-size: 15px;
 }
 #documents_table td, #documents_table th {
-    padding: 2px;
+    padding: 3px 7px;
 }
 #documents_table td, #documents_table th {
     text-align: center;
@@ -5431,6 +5432,15 @@ a.downloadableFile.pending {
 }
 #documents_table tr:nth-child(even) {
     background: #9FB7C7;
+}
+#documents_table small {
+    font-size: 13px;
+    color: rgb(102, 102, 102);
+    font-weight: bold;
+    font-style: italic;
+    display: inline-block;
+    text-align: right;
+    width: 100%;
 }
 #search-form {
     margin-bottom: 16px;

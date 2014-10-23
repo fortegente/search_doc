@@ -79,7 +79,10 @@ class zsCataloglist extends oxList
     private function _getQntDocumentsInCategory($id)
     {
         $oDb = oxDb::getDb();
-        $sQ = "SELECT count(*) FROM zsdocuments WHERE oxid = " . $oDb->quote($id);
+        $sQ = 'SELECT count(*) FROM zsdocuments WHERE marking = ' . $oDb->quote($id) .
+            ' OR REPLACE(marking, " ", "") LIKE "' . $id . ';%"
+              OR REPLACE(marking, " ", "") LIKE "%;' . $id . ';%"
+              OR REPLACE(marking, " ", "") LIKE "%;' . $id . '%"';
 
         return $oDb->getOne($sQ);
     }

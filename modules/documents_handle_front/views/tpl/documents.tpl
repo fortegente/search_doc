@@ -50,8 +50,8 @@
                     [{if $oxcmp_user && !$paymentExpired}]
                         <th><input type="checkbox" class="check_all"></th>
                     [{/if}]
-                    <th>[{oxmultilang ident="DOC_MARKING" }]</th>
                     <th>[{oxmultilang ident="DOC_PRIMARY_NUMBER" }]</th>
+                    <th>[{oxmultilang ident="DOC_MARKING" }]</th>
                     <th>[{oxmultilang ident="DOC_NAME" }]</th>
                     [{if $oxcmp_user && !$paymentExpired}]
                         <th>[{oxmultilang ident="DOC_CHANGING" }]</th>

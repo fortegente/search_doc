@@ -19,30 +19,30 @@
             <tr>
                 <td>
                     [{if $catalog.qnt > 0}]
-                    [{if $lstdssu || $catalog.runToDocuments}]
-                    <a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=documents&nd="}][{$catalog.id}]">
+                        [{if $lstdssu || $catalog.runToDocuments}]
+                            <a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=documents&nd="}][{$catalog.id}]">
                         [{else}]
-                        <a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=catalog&grp="}][{$catalogInfo[0]}][{$pgrp}][{$lstdssu}]">
-                            [{/if}]
-                            [{/if}]
-                            [{$catalog.id}]
-                            [{if $catalog.qnt > 0}]
-                        </a>
+                            <a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=catalog&grp="}][{$catalogInfo[0]}][{$pgrp}][{$lstdssu}]">
                         [{/if}]
+                    [{/if}]
+                    [{$catalog.id}]
+                    [{if $catalog.qnt > 0}]
+                        </a>
+                    [{/if}]
                 </td>
                 <td>
                     [{if $catalog.qnt > 0}]
                     [{if $lstdssu || $catalog.runToDocuments}]
                     <a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=documents&nd="}][{$catalog.id}]">
-                        [{else}]
+                    [{else}]
                         <a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=catalog&grp="}][{$catalogInfo[0]}][{$pgrp}][{$lstdssu}]">
                             [{/if}]
                             [{/if}]
                             [{$catalog.title}]
                             [{if $catalog.qnt > 0}]
                         </a>
-                        [{/if}]
-                        [{$catalog.text}] <span>[{$catalog.qnt}]</span>
+                    [{/if}]
+                    </br><small>[{$catalog.text}] [{$catalog.qnt}]</small>
                 </td>
             </tr>
         [{/foreach}]

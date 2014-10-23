@@ -16,7 +16,10 @@ class zsDocumentslist extends oxList
         $sFieldList = $oListObject->getSelectFields();
         $sQ = "select $sFieldList from " . $oListObject->getViewName();
         if ($filter) {
-            $sQ .= " where oxid = '" . $filter . "'";
+            $sQ .= ' where marking = "' . $filter .
+            '" OR REPLACE(marking, " ", "") LIKE "' . $filter . ';%"
+              OR REPLACE(marking, " ", "") LIKE "%;' . $filter . ';%"
+              OR REPLACE(marking, " ", "") LIKE "%;' . $filter . '%"';
         }
         $this->selectString($sQ);
 
@@ -29,7 +32,10 @@ class zsDocumentslist extends oxList
         $sQ = "select COUNT(*) from zsdocuments";
 
         if ($sFilterParam) {
-            $sQ .= " where oxid = '" . $sFilterParam . "'";
+            $sQ .= ' where marking = "' . $sFilterParam .
+                '" OR REPLACE(marking, " ", "") LIKE "' . $sFilterParam . ';%"
+              OR REPLACE(marking, " ", "") LIKE "%;' . $sFilterParam . ';%"
+              OR REPLACE(marking, " ", "") LIKE "%;' . $sFilterParam . '%"';
         }
 
         return $oDb->getOne($sQ);
@@ -53,11 +59,11 @@ class zsDocumentslist extends oxList
         switch($sSearchCategory) {
             //search by sign and name
             case 0:
-                return "select zsdocuments.* from zsdocuments WHERE name LIKE '%" . $sSearchParam . "%' OR oxid LIKE '%" . $sSearchParam . "%'";
+                return "select zsdocuments.* from zsdocuments WHERE name LIKE '%" . $sSearchParam . "%' OR marking LIKE '%" . $sSearchParam . "%'";
                 break;
             //search by sign
             case 1:
-                return "select zsdocuments.* from zsdocuments WHERE oxid LIKE '%" . $sSearchParam . "%'";
+                return "select zsdocuments.* from zsdocuments WHERE marking LIKE '%" . $sSearchParam . "%'";
                 break;
             //search by name
             case 2:
@@ -65,6 +71,9 @@ class zsDocumentslist extends oxList
                 break;
             //search by document category
             case 3:
+//                return "select zsdocuments.* from zsdocuments LEFT JOIN zscatalog as cat ON
+//                        zsdocuments.oxid = cat.oxid WHERE cat.title LIKE '%" . $sSearchParam . "%'";
+
                 return "select zsdocuments.* from zsdocuments LEFT JOIN zscatalog as cat ON
                         zsdocuments.oxid = cat.oxid WHERE cat.title LIKE '%" . $sSearchParam . "%'";
                 break;

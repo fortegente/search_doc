@@ -50,8 +50,19 @@ class zsDocuments extends oxBase
 
     private function _sendNotificationToUser()
     {
+        $userEmailCollection =$this->getDocumentsOwners($this->zsdocuments__oxid->value);
         $oEmail = oxNew('oxemail');
-        $oEmail->sendNotificationAboutDocumentsChange();
+        foreach ($userEmailCollection as $userEmail) {
+            $oEmail->sendNotificationAboutDocumentsChange($userEmail[0]);
+        }
+    }
+
+    public function getDocumentsOwners($documentId)
+    {
+        $oDb = oxDb::getDb();
+        $sQ = "SELECT oxusername FROM oxuser WHERE oxid IN (SELECT user_id FROM zsuser_documents WHERE documents_id = " . $oDb->quote($documentId) . ')';
+
+        return $oDb->getAll($sQ, false, false);
     }
 
     public function assignRecord( $sSelect )
