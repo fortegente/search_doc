@@ -39,8 +39,13 @@
                             <input class="remove_doc" type="submit" name="remove_docs[]" value="x">
                             <input type="hidden" name="document_id" value="[{$document->zsdocuments__oxid->value}]">
                         </td>
+                        [{assign var=itemsCollection value=";"|explode:$document->zsdocuments__marking->value}]
+                        <td>
+                            [{foreach from=$itemsCollection item=part}]
+                                [{$part}]<br>
+                            [{/foreach}]
+                        </td>
                         <td>[{$document->zsdocuments__oxid->value}]</td>
-                        <td>[{$document->zsdocuments__marking->value}]</td>
                         <td>[{$document->zsdocuments__name->value}]</td>
                         <td>[{$document->zsdocuments__changing->value}]</td>
                         <td>[{$document->zsdocuments__pages->value}]</td>

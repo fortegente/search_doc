@@ -71,7 +71,12 @@
                         [{if $oxcmp_user && !$paymentExpired && $oxcmp_user->oxuser__oxrights->value == 'user'}]
                             <td><input type="checkbox" name="favourite_docs[]" value="[{$document->zsdocuments__oxid->value}]"></td>
                         [{/if}]
-                        <td>[{$document->zsdocuments__marking->value}]</td>
+                        [{assign var=itemsCollection value=";"|explode:$document->zsdocuments__marking->value}]
+                        <td>
+                            [{foreach from=$itemsCollection item=part}]
+                                [{$part}]<br>
+                            [{/foreach}]
+                        </td>
                         <td>[{$document->zsdocuments__oxid->value}]</td>
                         <td>[{$document->zsdocuments__name->value}]</td>
                         [{if $oxcmp_user && !$paymentExpired}]

@@ -21,6 +21,9 @@ class zsDocumentslist extends oxList
               OR REPLACE(marking, " ", "") LIKE "%;' . $filter . ';%"
               OR REPLACE(marking, " ", "") LIKE "%;' . $filter . '%"';
         }
+
+        $sQ .= " ORDER BY marking";
+
         $this->selectString($sQ);
 
         return $this;
@@ -41,6 +44,15 @@ class zsDocumentslist extends oxList
         return $oDb->getOne($sQ);
     }
 
+    public function getSearchCount($sSearchParam, $sSearchCategory)
+    {
+        $sQ = $this->_getSuitableSqlQuery($sSearchParam, $sSearchCategory);
+        $oDb = oxDb::getDb( oxDb::FETCH_MODE_ASSOC );
+        $rs = $oDb->select($sQ);
+
+        return $rs->recordCount();
+    }
+
     public function getSearchDocumentsList($sSearchParam, $sSearchCategory, $iFrom = 0, $iLimit = 20)
     {
         if ($iLimit) {
@@ -59,15 +71,15 @@ class zsDocumentslist extends oxList
         switch($sSearchCategory) {
             //search by sign and name
             case 0:
-                return "select zsdocuments.* from zsdocuments WHERE name LIKE '%" . $sSearchParam . "%' OR marking LIKE '%" . $sSearchParam . "%'";
+                return "select zsdocuments.* from zsdocuments WHERE name LIKE '%" . $sSearchParam . "%' OR marking LIKE '%" . $sSearchParam . "%' ORDER BY marking";
                 break;
             //search by sign
             case 1:
-                return "select zsdocuments.* from zsdocuments WHERE marking LIKE '%" . $sSearchParam . "%'";
+                return "select zsdocuments.* from zsdocuments WHERE marking LIKE '%" . $sSearchParam . "%' ORDER BY marking";
                 break;
             //search by name
             case 2:
-                return "select zsdocuments.* from zsdocuments WHERE name LIKE '%" . $sSearchParam . "%'";
+                return "select zsdocuments.* from zsdocuments WHERE name LIKE '%" . $sSearchParam . "%' ORDER BY marking";
                 break;
             //search by document category
             case 3:
@@ -75,7 +87,7 @@ class zsDocumentslist extends oxList
 //                        zsdocuments.oxid = cat.oxid WHERE cat.title LIKE '%" . $sSearchParam . "%'";
 
                 return "select zsdocuments.* from zsdocuments LEFT JOIN zscatalog as cat ON
-                        zsdocuments.oxid = cat.oxid WHERE cat.title LIKE '%" . $sSearchParam . "%'";
+                        zsdocuments.oxid = cat.oxid WHERE cat.title LIKE '%" . $sSearchParam . "%' ORDER BY zsdocuments.marking";
                 break;
         }
     }
