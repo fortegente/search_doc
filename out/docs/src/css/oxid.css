@@ -5421,10 +5421,10 @@ a.downloadableFile.pending {
 }
 #documents_table, #documents_table tr, #documents_table th, #documents_table td {
     border: 2px solid #527a95;
-    font-size: 15px;
+    font-size: 13px;
 }
 #documents_table td, #documents_table th {
-    padding: 3px 7px;
+    padding: 3px;
 }
 #documents_table td, #documents_table th {
     text-align: center;

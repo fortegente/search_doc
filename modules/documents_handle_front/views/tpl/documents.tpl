@@ -52,7 +52,7 @@
                     [{/if}]
                     <th>[{oxmultilang ident="DOC_PRIMARY_NUMBER" }]</th>
                     <th>[{oxmultilang ident="DOC_MARKING" }]</th>
-                    <th>[{oxmultilang ident="DOC_NAME" }]</th>
+                    <th style="width: 30%">[{oxmultilang ident="DOC_NAME" }]</th>
                     [{if $oxcmp_user && !$paymentExpired}]
                         <th>[{oxmultilang ident="DOC_CHANGING" }]</th>
                         <th>[{oxmultilang ident="DOC_PAGES" }]</th>

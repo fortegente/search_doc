@@ -95,7 +95,7 @@ class zsUser2Documents extends oxUBase
 
     private function _getCurrentDate()
     {
-        $oDateTime = new DateTime('now', new DateTimezone('Europe/Kiev'));
+        $oDateTime = new DateTime('now', new DateTimezone('UTC'));
 
         return $oDateTime->format('Y-m-d H:i:s');
     }

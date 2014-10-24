@@ -10,7 +10,7 @@ class zsEmail extends zsEmail_parent
         $oShop = $this->_getShop();
         $this->_setMailParams($oShop);
         $oSmarty = $this->_getSmarty();
-        $this->setBody($oSmarty->fetch( $this->_modifyDocumentNotificationTemplate ));
+        $this->setBody('test text');
         $this->setSubject('subject');
 
         $this->setRecipient($userEmail, "");
