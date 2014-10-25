@@ -53,5 +53,7 @@ $aLang = array(
     'EMAIL'                             => 'Електронна адреса',
     'ERROR_MESSAGE_INPUT_NOTALLFIELDS'  => 'Поле обов\'язкове для заповнення',
     'REGISTER'                          => 'Зареєструватись',
-    'LOGOUT'                            => 'Вийти'
+    'LOGOUT'                            => 'Вийти',
+    'BACK_TO_CATALOG'                   => 'повернутися до каталогу',
+    'BACK_TO_GROUP'                     => 'повернутися до груп'
 );

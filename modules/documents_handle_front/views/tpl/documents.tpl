@@ -34,6 +34,8 @@
                 </select>
                 <input type="submit" value="[{oxmultilang ident="DOC_SEARCH"}]">
             </form>
+        [{else}]
+             <a class="back_button" href="javascript:history.back()">[{oxmultilang ident="BACK_TO_GROUP" }]</a>
         [{/if}]
         <form action="[{$oViewConf->getSelfActionLink() }]" method="post">
             [{ $oViewConf->getHiddenSid() }]
@@ -94,6 +96,9 @@
                     </tr>
                 [{/foreach}]
             </table>
+            [{if $filter}]
+                <a class="back_button last" href="javascript:history.back()">[{oxmultilang ident="BACK_TO_GROUP" }]</a>
+            [{/if}]
             [{if $oxcmp_user && !$paymentExpired}]
                 <input class="add_documents" type="submit" value="[{oxmultilang ident="DOC_ADD_TO_ACCOUNT" }]">
             [{/if}]

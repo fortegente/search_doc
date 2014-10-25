@@ -1,11 +1,15 @@
 [{capture append="oxidBlock_content"}]
     [{assign var=pgrp value=''}]
+    [{assign var=backTitle value=$oView->getBackTitle()}]
     [{assign var=lstdssu value=''}]
     [{assign var=catalogList value=$oView->getCatalogList()}]
     <div id="header-info-block">
         <h2>Список</h2>
     </div>
     [{if $catalogList|@count}]
+    [{if $backTitle}]
+        <a class="back_button" href="javascript:history.back()">[{$backTitle}]</a>
+    [{/if}]
     <table id="documents_table">
         [{foreach from=$catalogList item=catalog}]
             [{assign var=catalogInfo value="."|explode:$catalog.id}]
@@ -47,6 +51,9 @@
             </tr>
         [{/foreach}]
     </table>
+    [{if $backTitle}]
+        <a class="back_button last" href="javascript:history.back()">[{$backTitle}]</a>
+    [{/if}]
     [{else}]
     [{oxmultilang ident="DOCS_NO_CATEGORY" }]
     [{/if}]

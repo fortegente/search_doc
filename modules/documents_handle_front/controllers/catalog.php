@@ -10,17 +10,25 @@ class catalog extends oxUBase
         if ( $this->_oCatalogList === null ) {
             $oCatalogList = oxNew("zsCataloglist");
             $oCatalogList->init("zsCatalog");
-
-           // if ($iCnt = $oDocumentsList->getCount()) {
-            //    $this->_iCntPages = ceil($iCnt / $this->_oCatalogList);
             $group = oxConfig::getParameter('grp');
             $subgroup = oxConfig::getParameter('pgrp');
             $documents = oxConfig::getParameter('lstdssu');
-
             $this->_aCatalogList = $oCatalogList->getCatalogList($group, $subgroup, $documents);
-           // }
         }
 
         return $this->_aCatalogList;
+    }
+
+    public function getBackTitle()
+    {
+        $group = oxConfig::getParameter('grp');
+        $subgroup = oxConfig::getParameter('pgrp');
+        $documents = oxConfig::getParameter('lstdssu');
+
+        if ($group && !$subgroup && !$documents) {
+            return oxRegistry::getLang()->translateString('BACK_TO_CATALOG', oxRegistry::getLang()->getBaseLanguage(), false );
+        } else if ($group && $subgroup) {
+            return oxRegistry::getLang()->translateString('BACK_TO_GROUP', oxRegistry::getLang()->getBaseLanguage(), false );
+        }
     }
 }

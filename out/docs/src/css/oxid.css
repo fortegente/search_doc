@@ -5497,7 +5497,7 @@ a.back_button {
     font-weight: bold;
 }
 a.back_button.last {
-    margin-top: 20px;
+    margin-top: 8px;
 }
 input.add_documents {
     margin-top: 20px;
