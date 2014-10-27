@@ -55,29 +55,17 @@ class documents extends oxUBase
         }
     }
 
-//    private function _getSearchDocumentsList($sSearchParam)
-//    {
-//        if (!empty($sSearchParam)) {
-//            $oDocumentsList = oxNew("zsDocumentslist");
-//            $oDocumentsList->init("zsDocuments");
-//            $sSearchCategory = oxConfig::getParameter('search_category');
-//
-//            $oDocumentsList->getSearchDocumentsList($sSearchParam, $sSearchCategory, $this->getActPage() * $this->_documentsPerPage);
-//            if ($oDocumentsList->count() > 0) {
-//                $this->_iCntPages = ceil($oDocumentsList->count() / $this->_documentsPerPage);
-//
-//                return $oDocumentsList;
-//            }
-//        }
-//    }
-
     private function _getSearchDocumentsList($sSearchParam)
     {
         if (!empty($sSearchParam)) {
             $oDocumentsList = oxNew("zsDocumentslist");
             $oDocumentsList->init("zsDocuments");
             $sSearchCategory = oxConfig::getParameter('search_category');
-            $iCnt = $oDocumentsList->getSearchCount($sSearchParam, $sSearchCategory);
+
+            if ($sSearchCategory != 3) {
+                $iCnt = $oDocumentsList->getSearchCount($sSearchParam, $sSearchCategory);
+            }
+
             $oDocumentsList->getSearchDocumentsList($sSearchParam, $sSearchCategory, $this->getActPage() * $this->_documentsPerPage);
             if ($iCnt > 0) {
                 $this->_iCntPages = ceil($iCnt / $this->_documentsPerPage);

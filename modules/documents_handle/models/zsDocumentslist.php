@@ -55,6 +55,11 @@ class zsDocumentslist extends oxList
 
     public function getSearchDocumentsList($sSearchParam, $sSearchCategory, $iFrom = 0, $iLimit = 20)
     {
+        //if search by category
+        if ($sSearchCategory == 3) {
+            $this->_redirectToSuitableCategoryList($sSearchParam);
+        }
+
         if ($iLimit) {
             $this->setSqlLimit($iFrom, $iLimit);
         }
@@ -66,29 +71,44 @@ class zsDocumentslist extends oxList
         return $this;
     }
 
+    private function _redirectToSuitableCategoryList($sSearchParam)
+    {
+        $categoryNumbers = explode('.', $sSearchParam);
+
+        switch(count($categoryNumbers)) {
+            case 1:
+                oxRegistry::getUtils()->redirect( oxRegistry::getConfig()->getShopUrl() . 'index.php?cl=catalog&grp=' . $categoryNumbers[0]);
+            case 2:
+                oxRegistry::getUtils()->redirect( oxRegistry::getConfig()->getShopUrl() . 'index.php?cl=catalog&grp=' . $categoryNumbers[0] . '&pgrp=' . $categoryNumbers[1]);
+            case 3:
+                oxRegistry::getUtils()->redirect( oxRegistry::getConfig()->getShopUrl() . 'index.php?cl=documents&nd=' . $categoryNumbers[0] . '.' . $categoryNumbers[1] . '.' . $categoryNumbers[2]);
+                return;
+        }
+    }
+
     private function _getSuitableSqlQuery($sSearchParam, $sSearchCategory)
     {
         switch($sSearchCategory) {
             //search by sign and name
             case 0:
-                return "select zsdocuments.* from zsdocuments WHERE name LIKE '%" . $sSearchParam . "%' OR marking LIKE '%" . $sSearchParam . "%' ORDER BY marking";
+                return "select zsdocuments.* from zsdocuments WHERE name LIKE '%" . $sSearchParam . "%' OR oxid LIKE '%" . $sSearchParam . "%' ORDER BY marking";
                 break;
             //search by sign
             case 1:
-                return "select zsdocuments.* from zsdocuments WHERE marking LIKE '%" . $sSearchParam . "%' ORDER BY marking";
+                return "select zsdocuments.* from zsdocuments WHERE oxid LIKE '%" . $sSearchParam . "%' ORDER BY marking";
                 break;
             //search by name
             case 2:
                 return "select zsdocuments.* from zsdocuments WHERE name LIKE '%" . $sSearchParam . "%' ORDER BY marking";
                 break;
             //search by document category
-            case 3:
+//            case 3:
+////                return "select zsdocuments.* from zsdocuments LEFT JOIN zscatalog as cat ON
+////                        zsdocuments.oxid = cat.oxid WHERE cat.title LIKE '%" . $sSearchParam . "%'";
+//
 //                return "select zsdocuments.* from zsdocuments LEFT JOIN zscatalog as cat ON
-//                        zsdocuments.oxid = cat.oxid WHERE cat.title LIKE '%" . $sSearchParam . "%'";
-
-                return "select zsdocuments.* from zsdocuments LEFT JOIN zscatalog as cat ON
-                        zsdocuments.oxid = cat.oxid WHERE cat.title LIKE '%" . $sSearchParam . "%' ORDER BY zsdocuments.marking";
-                break;
+//                        zsdocuments.oxid = cat.oxid WHERE cat.title LIKE '%" . $sSearchParam . "%' ORDER BY zsdocuments.marking";
+//                break;
         }
     }
 }
