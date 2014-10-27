@@ -79,10 +79,24 @@ class zsDocumentslist extends oxList
             case 1:
                 oxRegistry::getUtils()->redirect( oxRegistry::getConfig()->getShopUrl() . 'index.php?cl=catalog&grp=' . $categoryNumbers[0]);
             case 2:
-                oxRegistry::getUtils()->redirect( oxRegistry::getConfig()->getShopUrl() . 'index.php?cl=catalog&grp=' . $categoryNumbers[0] . '&pgrp=' . $categoryNumbers[1]);
+                if ($this->_hasCategoryDocuments($sSearchParam)) {
+                    oxRegistry::getUtils()->redirect( oxRegistry::getConfig()->getShopUrl() . 'index.php?cl=documents&nd=' . $sSearchParam);
+                } else {
+                    oxRegistry::getUtils()->redirect( oxRegistry::getConfig()->getShopUrl() . 'index.php?cl=catalog&grp=' . $categoryNumbers[0] . '&pgrp=' . $categoryNumbers[1]);
+                }
             case 3:
-                oxRegistry::getUtils()->redirect( oxRegistry::getConfig()->getShopUrl() . 'index.php?cl=documents&nd=' . $categoryNumbers[0] . '.' . $categoryNumbers[1] . '.' . $categoryNumbers[2]);
+                oxRegistry::getUtils()->redirect( oxRegistry::getConfig()->getShopUrl() . 'index.php?cl=documents&nd=' . $sSearchParam);
                 return;
+        }
+    }
+
+    private function _hasCategoryDocuments($categoryMark)
+    {
+        $oDb = oxDb::getDb();
+        $sQ = "SELECT count(*) FROM zscatalog WHERE oxid LIKE '" . $categoryMark . "%'";
+
+        if ($oDb->getOne($sQ) == 1) {
+            return true;
         }
     }
 

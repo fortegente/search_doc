@@ -50,10 +50,11 @@ class zsDocuments extends oxBase
 
     private function _sendNotificationToUser()
     {
-        $userEmailCollection =$this->getDocumentsOwners($this->zsdocuments__oxid->value);
+        $documentId = $this->zsdocuments__oxid->value;
+        $userEmailCollection =$this->getDocumentsOwners($documentId);
         $oEmail = oxNew('oxemail');
         foreach ($userEmailCollection as $userEmail) {
-            $oEmail->sendNotificationAboutDocumentsChange($userEmail[0]);
+            $oEmail->sendNotificationAboutDocumentsChange($userEmail[0], $documentId);
         }
     }
 

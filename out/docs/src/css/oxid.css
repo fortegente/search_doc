@@ -5584,10 +5584,12 @@ input.add_documents {
 #documents_table .remove_doc {
     cursor: pointer;
     font-weight: bold;
-    width: 30px;
-    height: 30px;
+    width: 27px;
+    height: 27px;
     padding-top: 0px;
-    font-size: 21px;
+    font-size: 17px;
+    border-radius: 20px;
+    border: none;
 }
 #category_list {
     font-size: 15px;

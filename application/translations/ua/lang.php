@@ -10,7 +10,7 @@ $aLang = array(
     'DOC_CHANGING'                      => 'Зміна НД',
     'DOC_PAGES'                         => 'К-ть стор.',
     'DOC_STATE'                         => 'Стан',
-    'DOC_CANCEL'                        => 'На заміну / зі скасуванням',
+    'DOC_CANCEL'                        => 'На заміну/зі <br>скас-ням',
     'DOC_REPLACE'                       => 'Позначення НД яким замінюється',
     'DOC_AVAILABLE_FROM'                => 'Чинний від',
     'DOC_AVAILABLE_TO'                  => 'Чинний до',
@@ -55,5 +55,7 @@ $aLang = array(
     'REGISTER'                          => 'Зареєструватись',
     'LOGOUT'                            => 'Вийти',
     'BACK_TO_CATALOG'                   => 'повернутися до каталогу',
-    'BACK_TO_GROUP'                     => 'повернутися до груп'
+    'BACK_TO_GROUP'                     => 'повернутися до груп',
+    'DOCS_DOCS'                         => 'Документи',
+    'DOCS_CATALOG'                      => 'Каталог'
 );

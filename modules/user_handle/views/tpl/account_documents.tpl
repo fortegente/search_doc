@@ -22,9 +22,9 @@
                 <tr>
                     <th>[{oxmultilang ident="DOC_REMOVE_DOC" }]</th>
                     <th>[{oxmultilang ident="DOC_PRIMARY_NUMBER" }]</th>
-                    <th>[{oxmultilang ident="DOC_MARKING" }]</th>
+                    <th style="width: 12%;">[{oxmultilang ident="DOC_MARKING" }]</th>
                     <th style="width: 30%">[{oxmultilang ident="DOC_NAME" }]</th>
-                    <th>[{oxmultilang ident="DOC_CHANGING" }]</th>
+                    <th style="width: 8%;">[{oxmultilang ident="DOC_CHANGING" }]</th>
                     <th>[{oxmultilang ident="DOC_PAGES" }]</th>
                     <th>[{oxmultilang ident="DOC_STATE" }]</th>
                     <th>[{oxmultilang ident="DOC_CANCEL" }]</th>

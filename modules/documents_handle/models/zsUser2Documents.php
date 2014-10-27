@@ -50,7 +50,7 @@ class zsUser2Documents extends oxUBase
         $oDb = oxDb::getDb();
         $sQ = "SELECT zsdocuments.*, zsuser_documents.last_seen as last_seen from zsdocuments LEFT JOIN  zsuser_documents ON
                 zsdocuments.oxid = zsuser_documents.documents_id
-                WHERE zsuser_documents.user_id = " . $oDb->quote($this->_currentUserId);
+                WHERE zsuser_documents.user_id = " . $oDb->quote($this->_currentUserId) . ' ORDER BY zsdocuments.last_update DESC, zsdocuments.marking';
 
         $oDocuments->selectString( $sQ );
 
@@ -95,7 +95,7 @@ class zsUser2Documents extends oxUBase
 
     private function _getCurrentDate()
     {
-        $oDateTime = new DateTime('now', new DateTimezone('UTC'));
+        $oDateTime = new DateTime('now', new DateTimezone('Europe/Kiev'));
 
         return $oDateTime->format('Y-m-d H:i:s');
     }
