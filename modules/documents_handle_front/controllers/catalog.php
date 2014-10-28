@@ -31,4 +31,9 @@ class catalog extends oxUBase
             return oxRegistry::getLang()->translateString('BACK_TO_GROUP', oxRegistry::getLang()->getBaseLanguage(), false );
         }
     }
+
+    public function isCatalogAfterSearchAction()
+    {
+        return (oxConfig::getParameter('redirected')) ? true : false;
+    }
 }

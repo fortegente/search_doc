@@ -35,7 +35,11 @@
                 <input type="submit" value="[{oxmultilang ident="DOC_SEARCH"}]">
             </form>
         [{else}]
-             <a class="back_button" href="javascript:history.back()">[{oxmultilang ident="BACK_TO_GROUP" }]</a>
+             [{if $isAfterSearching}]
+                <a class="back_button" href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=documents"}]">[{oxmultilang ident="BACK_TO_DOC" }]</a>
+             [{else}]
+                <a class="back_button" href="javascript:history.back()">[{oxmultilang ident="BACK_TO_GROUP" }]</a>
+             [{/if}]
         [{/if}]
         <form action="[{$oViewConf->getSelfActionLink() }]" method="post">
             [{ $oViewConf->getHiddenSid() }]
@@ -53,7 +57,7 @@
                         <th><input type="checkbox" class="check_all"></th>
                     [{/if}]
                     <th>[{oxmultilang ident="DOC_PRIMARY_NUMBER" }]</th>
-                    <th style="width: 12%;">[{oxmultilang ident="DOC_MARKING" }]</th>
+                    <th  style="width: 8%;">[{oxmultilang ident="DOC_MARKING" }]</th>
                     <th style="width: 30%">[{oxmultilang ident="DOC_NAME" }]</th>
                     [{if $oxcmp_user && !$paymentExpired}]
                         <th style="width: 8%;">[{oxmultilang ident="DOC_CHANGING" }]</th>
@@ -97,7 +101,11 @@
                 [{/foreach}]
             </table>
             [{if $filter}]
-                <a class="back_button last" href="javascript:history.back()">[{oxmultilang ident="BACK_TO_GROUP" }]</a>
+                [{if $isAfterSearching}]
+                    <a class="back_button last" href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=documents"}]">[{oxmultilang ident="BACK_TO_DOC" }]</a>
+                [{else}]
+                    <a class="back_button last" href="javascript:history.back()">[{oxmultilang ident="BACK_TO_GROUP" }]</a>
+                [{/if}]
             [{/if}]
             [{if $oxcmp_user && !$paymentExpired}]
                 <input class="add_documents" type="submit" value="[{oxmultilang ident="DOC_ADD_TO_ACCOUNT" }]">

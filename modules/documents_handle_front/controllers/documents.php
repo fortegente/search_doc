@@ -23,6 +23,10 @@ class documents extends oxUBase
             $this->_aViewData["filter"] = $searchParam;
         }
 
+        if (oxConfig::getParameter('nd') && oxConfig::getParameter('redirected')) {
+            $this->_aViewData["isAfterSearching"] = $searchParam;
+        }
+
         if ($searchCategory = oxConfig::getParameter('search_category')) {
             $this->_aViewData["search_category"] = $searchCategory;
         }
