@@ -5369,7 +5369,7 @@ a.downloadableFile.pending {
 .homebox:nth-child(4) .overlay {
     padding-top: 139px;
 }
-.homebox .overlay a, .register_block .register_button {
+.homebox .overlay a, .register_block .register_button, .reg_type_switcher a {
     display: inline-block;
     width: 150px;
     height: 50px;
@@ -5389,7 +5389,7 @@ a.downloadableFile.pending {
     -moz-appearance: none;
     -webkit-appearance: none;
 }
-.homebox .overlay a:hover, .register_block .register_button:hover {
+.homebox .overlay a:hover, .register_block .register_button:hover, .reg_type_switcher a:hover {
     border-radius: 8px;
     color: #fff;
     border: 0;
@@ -5673,4 +5673,39 @@ input.add_documents {
 }
 .register_block .register_button:hover {
     text-decoration: none;
+}
+.form.refister_block {
+    width: 100%;
+    margin-top: 30px;
+}
+.form.refister_block td {
+    text-align: center;
+    padding: 15px;
+    vertical-align: middle;
+}
+.form.refister_block .oxValidateError {
+    padding: 2px 0 5px 0px;
+}
+.form.refister_block tr:nth-child(even) {
+    background: #E6E6E6;
+}
+.form.refister_block tr:nth-child(odd) {
+    background: #D6D6D6;
+}
+.form.refister_block tr td:last-child {
+    color: rgb(78, 78, 78);
+}
+.reg_type_switcher {
+    display: inline-block;
+}
+.reg_switcher_block {
+    text-align: center;
+    margin-top: 32px;
+}
+.reg_type_switcher a {
+    text-decoration: none;
+    width: 225px;
+}
+.reg_type_switcher a.physical {
+    margin-right: 200px;
 }

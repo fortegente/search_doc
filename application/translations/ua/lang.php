@@ -63,5 +63,8 @@ $aLang = array(
     'FIRST_NAME'                        => 'Ім\'я',
     'LAST_NAME'                         => 'Прізвище',
     'PERSONAL_PHONE'                    => 'Телефон',
-    'CONFIRM_PASSWORD'                  => 'Підтвердіть пароль'
+    'CONFIRM_PASSWORD'                  => 'Підтвердіть пароль',
+    'ORGANIZATION_NAME'                 => 'Назва організації',
+    'CONTACT_NAME'                      => 'Контактна особа',
+    'CONTACT_PHONE'                     => 'Телефон контактної особи'
 );
