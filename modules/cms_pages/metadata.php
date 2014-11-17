@@ -12,12 +12,14 @@ $aModule = array(
     'email'        => 'fortegente@gmail.com',
     'extend'       => array(),
     'files' => array(
-        'zsexpert' => 'cms_pages/controllers/zsexpert.php',
-        'zsprofessional' => 'cms_pages/controllers/zsprofessional.php'
+        'zsexpert'       => 'cms_pages/controllers/zsexpert.php',
+        'zsprofessional' => 'cms_pages/controllers/zsprofessional.php',
+        'registerinfo'   => 'cms_pages/controllers/registerinfo.php'
 
     ),
     'templates' => array(
-        'expert.tpl' => 'cms_pages/views/tpl/expert.tpl',
-        'zsprofessional.tpl' => 'cms_pages/views/tpl/zsprofessional.tpl'
+        'expert.tpl'         => 'cms_pages/views/tpl/expert.tpl',
+        'zsprofessional.tpl' => 'cms_pages/views/tpl/zsprofessional.tpl',
+        'register-info.tpl'  => 'cms_pages/views/tpl/register-info.tpl'
     )
 );

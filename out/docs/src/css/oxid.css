@@ -5369,7 +5369,7 @@ a.downloadableFile.pending {
 .homebox:nth-child(4) .overlay {
     padding-top: 139px;
 }
-.homebox .overlay a {
+.homebox .overlay a, .register_block .register_button {
     display: inline-block;
     width: 150px;
     height: 50px;
@@ -5389,7 +5389,7 @@ a.downloadableFile.pending {
     -moz-appearance: none;
     -webkit-appearance: none;
 }
-.homebox .overlay a:hover {
+.homebox .overlay a:hover, .register_block .register_button:hover {
     border-radius: 8px;
     color: #fff;
     border: 0;
@@ -5639,4 +5639,38 @@ input.add_documents {
 }
 .back_button.account-back.logout {
     float: right;
+}
+.register_block {
+    text-align: center;
+    margin: 70px 0 100px 0;
+}
+.register_block .left_block, .register_block right_block {
+    display: inline-block;
+    width: 49%;
+}
+.register_block span {
+    text-decoration: underline;
+}
+.register_block .left_block {
+    float: left;
+}
+.register_block .account-type {
+    font-size: 35px;
+    color: #1f97a3;
+}
+.register_block .pay-type {
+    font-size: 23px;
+    margin-top: 25px;
+    font-weight: bold;
+    color: #464646;
+}
+.register_block .pay-type a {
+    color: #464646;
+}
+.register_block .register_button {
+    margin-top: 45px;
+    width: 190px;
+}
+.register_block .register_button:hover {
+    text-decoration: none;
 }

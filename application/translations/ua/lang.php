@@ -57,5 +57,11 @@ $aLang = array(
     'BACK_TO_CATALOG'                   => 'повернутися до каталогу',
     'BACK_TO_GROUP'                     => 'повернутися до груп',
     'DOCS_DOCS'                         => 'Документи',
-    'DOCS_CATALOG'                      => 'Каталог'
+    'DOCS_CATALOG'                      => 'Каталог',
+    'OPEN_ACCOUNT'                      => 'Реєстрація',
+    'EMAIL_ADDRESS'                     => 'E-mail',
+    'FIRST_NAME'                        => 'Ім\'я',
+    'LAST_NAME'                         => 'Прізвище',
+    'PERSONAL_PHONE'                    => 'Телефон',
+    'CONFIRM_PASSWORD'                  => 'Підтвердіть пароль'
 );
