@@ -5709,3 +5709,6 @@ input.add_documents {
 .reg_type_switcher a.physical {
     margin-right: 200px;
 }
+.account_info_block {
+    text-align: right;
+}

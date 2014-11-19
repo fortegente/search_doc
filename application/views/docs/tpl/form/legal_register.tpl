@@ -15,11 +15,11 @@
                     <label [{if $oView->isFieldRequired(oxuser__oxfname) }]class="req"[{/if}]>[{ oxmultilang ident="ORGANIZATION_NAME"}]*</label>
                 </td>
                 <td>
-                    <input [{if $oView->isFieldRequired(oxuser__oxcompany) }]class="js-oxValidate js-oxValidate_notEmpty" [{/if}]type="text" size="37" maxlength="255" name="invadr[oxuser__oxcompany]" value="[{if isset( $invadr.oxuser__oxcompany ) }][{ $invadr.oxuser__oxcompany }][{else }][{ $oxcmp_user->oxuser__oxcompany->value }][{/if}]">
-                    [{if $oView->isFieldRequired(oxuser__oxcompany) }]
+                    <input [{if $oView->isFieldRequired(oxuser__oxfname) }]class="js-oxValidate js-oxValidate_notEmpty" [{/if}]type="text" size="37" maxlength="255" name="invadr[oxuser__oxfname]" value="[{if isset( $invadr.oxuser__oxfname ) }][{ $invadr.oxuser__oxfname }][{else }][{ $oxcmp_user->oxuser__oxfname->value }][{/if}]">
+                    [{if $oView->isFieldRequired(oxuser__oxfname) }]
                         <p class="oxValidateError">
                                 <span class="js-oxError_notEmpty">[{ oxmultilang ident="ERROR_MESSAGE_INPUT_NOTALLFIELDS" }]</span>
-                                [{include file="message/inputvalidation.tpl" aErrors=$aErrors.oxuser__oxcompany}]
+                                [{include file="message/inputvalidation.tpl" aErrors=$aErrors.oxuser__oxfname}]
                         </p>
                     [{/if}]
                 </td>
@@ -48,11 +48,11 @@
                     <label [{if $oView->isFieldRequired(oxuser__oxlname) }]class="req"[{/if}]>[{ oxmultilang ident="CONTACT_NAME"}]*</label>
                 </td>
                 <td>
-                    <input [{if $oView->isFieldRequired(oxuser__oxaddinfo) }]class="js-oxValidate js-oxValidate_notEmpty" [{/if}]type="text" size="37" maxlength="255" name="invadr[oxuser__oxaddinfo]" value="[{if isset( $invadr.oxuser__oxaddinfo ) }][{ $invadr.oxuser__oxaddinfo }][{else }][{ $oxcmp_user->oxuser__oxaddinfo->value }][{/if}]">
-                    [{if $oView->isFieldRequired(oxuser__oxaddinfo) }]
+                    <input [{if $oView->isFieldRequired(oxuser__oxlname) }]class="js-oxValidate js-oxValidate_notEmpty" [{/if}]type="text" size="37" maxlength="255" name="invadr[oxuser__oxlname]" value="[{if isset( $invadr.oxuser__oxlname ) }][{ $invadr.oxuser__oxlname }][{else }][{ $oxcmp_user->oxuser__oxlname->value }][{/if}]">
+                    [{if $oView->isFieldRequired(oxuser__oxlname) }]
                     <p class="oxValidateError">
                         <span class="js-oxError_notEmpty">[{ oxmultilang ident="ERROR_MESSAGE_INPUT_NOTALLFIELDS" }]</span>
-                        [{include file="message/inputvalidation.tpl" aErrors=$aErrors.oxuser__oxaddinfo}]
+                        [{include file="message/inputvalidation.tpl" aErrors=$aErrors.oxuser__oxlname}]
                     </p>
                     [{/if}]
                 </td>

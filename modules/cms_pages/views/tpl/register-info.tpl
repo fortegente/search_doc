@@ -13,12 +13,12 @@
     <div class="register_block">
         <div class="left_block">
             <div class="account-type"><span>Standart-info</span> профі</div>
-            <div class="pay-type"><a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=zsprofessional"}]">Передплачений доступ</a></div>
+            <div class="pay-type"><a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=zsprofessional"}]">Дізнатися більше</a></div>
             <a class="register_button" href="[{oxgetseourl ident=$oViewConf->getSslSelfLink()|cat:"cl=register" params='reg_type=profi' }]">зареєструватись</a>
         </div>
         <div class="right_block">
             <div class="account-type"><span>Standart-info</span> експерт</div>
-            <div class="pay-type">Безоплатний доступ</div>
+            <div class="pay-type"><a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=zsexpert"}]">Дізнатися більше</a></div>
             <a class="register_button" href="[{oxgetseourl ident=$oViewConf->getSslSelfLink()|cat:"cl=register" params='reg_type=expert' }]">зареєструватись</a>
         </div>
     </div>

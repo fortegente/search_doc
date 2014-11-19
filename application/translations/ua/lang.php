@@ -66,5 +66,9 @@ $aLang = array(
     'CONFIRM_PASSWORD'                  => 'Підтвердіть пароль',
     'ORGANIZATION_NAME'                 => 'Назва організації',
     'CONTACT_NAME'                      => 'Контактна особа',
-    'CONTACT_PHONE'                     => 'Телефон контактної особи'
+    'CONTACT_PHONE'                     => 'Телефон контактної особи',
+    'BILLING_SHIPPING_SETTINGS'         => 'Змінити персональні дані',
+    'SAVE_ACCOUNT_INFO'                 => 'Зберегти',
+    'ERROR_MESSAGE_PASSWORD_TOO_SHORT'  => 'Пароль повинен мати щонайменше 6 символів',
+    'ERROR_MESSAGE_USER_PWDDONTMATCH'   => 'Паролі не співпадають'
 );

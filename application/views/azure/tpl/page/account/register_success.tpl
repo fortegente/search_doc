@@ -1,6 +1,11 @@
 [{capture append="oxidBlock_content"}]
     [{assign var="template_title" value="MESSAGE_WELCOME_REGISTERED_USER"|oxmultilangassign }]
-    <h1 id="openAccHeader" class="pageHead">[{ oxmultilang ident="MESSAGE_WELCOME_REGISTERED_USER" }]</h1>
+    <div id="header-info-block">
+        <h2>Реєстрація пройшла успішно</h2>
+        <span>
+            Дякуємо за реєстрацію на нашому сайті.
+        </span>
+    </div>
     <div class="box info">
       [{if $oView->getRegistrationStatus() == 1}]
         [{ oxmultilang ident="MESSAGE_CONFIRMING_REGISTRATION" }]<br><br>[{ oxmultilang ident="THANK_YOU" SUFFIC="." }]

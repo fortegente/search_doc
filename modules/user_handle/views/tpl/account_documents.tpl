@@ -10,7 +10,9 @@
         [{include file="message/notice.tpl" statusMessage=$_statusMessage}]
     [{/if}]
     [{assign var=aDocuments value=$oView->getUserDocumentsList()}]
-
+    <div class="account_info_block">
+        <a class="back_button account-back" href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=account_user"}]">[{oxmultilang ident="BILLING_SHIPPING_SETTINGS" }]</a>
+    </div>
     [{if count($aDocuments) > 0}]
          <form action="[{$oViewConf->getSelfActionLink() }]" method="post">
             [{$oViewConf->getHiddenSid() }]
