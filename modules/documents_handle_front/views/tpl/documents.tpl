@@ -14,6 +14,10 @@
     </div>
     [{assign var="documentsCollection" value=$oView->getDocumentsList()}]
 
+    [{if $oxcmp_user}]
+        [{assign var="isProfi" value=$oxcmp_user->inGroup('oxuser')}]
+    [{/if}]
+
     [{if $oView->getSaveStatus() }]
         [{assign var="_statusMessage" value="DOCS_THANKS_SAVE_MESSAGE"|oxmultilangassign:$oxcmp_shop->oxshops__oxname->value}]
         [{include file="message/notice.tpl" statusMessage=$_statusMessage}]
@@ -21,7 +25,7 @@
     [{include file="message/errors.tpl"}]
 
     [{if $documentsCollection}]
-        [{assign var="paymentExpired" value=$oView->checkExpiredDateForPayment($oxcmp_user->oxuser__zs_pay_date->value, $oxcmp_user->oxuser__zs_pay_duration->value) }]
+        [{assign var="paymentExpired" value=$oView->checkExpiredDateForPayment($oxcmp_user->oxuser__zs_pay_date->value, $oxcmp_user->oxuser__zs_pay_duration->value, $isProfi) }]
         [{if !$filter}]
             <form action="[{$oViewConf->getSelfActionLink()}]" method="post" id="search-form">
                 <input type="hidden" name="cl" value="documents"/>
@@ -45,7 +49,7 @@
             [{ $oViewConf->getHiddenSid() }]
             <input type="hidden" name="fnc" value="addFavouriteDocuments"/>
             <input type="hidden" name="cl" value="documents"/>
-            [{if $oxcmp_user && !$paymentExpired}]
+            [{if $oxcmp_user && !$paymentExpired && $isProfi}]
                 <input class="add_documents top" type="submit" value="[{oxmultilang ident="DOC_ADD_TO_ACCOUNT" }]">
             [{/if}]
             [{if $searchparam}]
@@ -53,12 +57,12 @@
             [{/if}]
             <table id="documents_table">
                 <tr>
-                    [{if $oxcmp_user && !$paymentExpired}]
+                    [{if $oxcmp_user && !$paymentExpired && $isProfi}]
                         <th><input type="checkbox" class="check_all"></th>
                     [{/if}]
-                    <th>[{oxmultilang ident="DOC_PRIMARY_NUMBER" }]</th>
-                    <th  style="width: 8%;">[{oxmultilang ident="DOC_MARKING" }]</th>
-                    <th style="width: 30%">[{oxmultilang ident="DOC_NAME" }]</th>
+                    <th [{if !$oxcmp_user}] style="width: 13%"; [{/if}]>[{oxmultilang ident="DOC_PRIMARY_NUMBER" }]</th>
+                    <th  [{if !$oxcmp_user}] style="width: 19%"; [{else}] style="width: 8%;" [{/if}]>[{oxmultilang ident="DOC_MARKING" }]</th>
+                    <th [{if !$oxcmp_user}] style="width: 60%"; [{else}] style="width: 30%;" [{/if}]>[{oxmultilang ident="DOC_NAME" }]</th>
                     [{if $oxcmp_user && !$paymentExpired}]
                         <th style="width: 8%;">[{oxmultilang ident="DOC_CHANGING" }]</th>
                         <th>[{oxmultilang ident="DOC_PAGES" }]</th>
@@ -74,7 +78,7 @@
                 </tr>
                 [{foreach from=$documentsCollection item=document}]
                     <tr>
-                        [{if $oxcmp_user && !$paymentExpired && $oxcmp_user->oxuser__oxrights->value == 'user'}]
+                        [{if $oxcmp_user && !$paymentExpired && $isProfi}]
                             <td><input type="checkbox" name="favourite_docs[]" value="[{$document->zsdocuments__oxid->value}]"></td>
                         [{/if}]
                         [{assign var=itemsCollection value=";"|explode:$document->zsdocuments__marking->value}]
@@ -107,7 +111,7 @@
                     <a class="back_button last" href="javascript:history.back()">[{oxmultilang ident="BACK_TO_GROUP" }]</a>
                 [{/if}]
             [{/if}]
-            [{if $oxcmp_user && !$paymentExpired}]
+            [{if $oxcmp_user && !$paymentExpired && $isProfi}]
                 <input class="add_documents" type="submit" value="[{oxmultilang ident="DOC_ADD_TO_ACCOUNT" }]">
             [{/if}]
             [{if $searchparam}]

@@ -537,6 +537,15 @@ class oxcmp_user extends oxView
             }
 
             $oUser->addToGroup( 'oxidnotyetordered' );
+
+            $sRegType = oxConfig::getParameter('reg_type', true);
+
+            if ($sRegType == 'expert') {
+                $oUser->addToGroup('oxtrial_user');
+            }elseif ($sRegType == 'profi'){
+                $oUser->addToGroup('oxuser');
+            }
+
             $oUser->addDynGroup( oxSession::getVar( 'dgr' ), $myConfig->getConfigParam( 'aDeniedDynGroups' ) );
             $oUser->logout();
 
@@ -813,5 +822,16 @@ class oxcmp_user extends oxView
                 $oxEMail->sendRegisterEmail( $oUser );
             }
         }
+    }
+
+    public function inGroup($group)
+    {
+        $oUser = $this->getUser();
+
+        if ( !$oUser ) {
+            return;
+        }
+
+        return $oUser->inGroup($group);
     }
 }

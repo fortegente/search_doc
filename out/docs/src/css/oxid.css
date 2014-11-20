@@ -5712,3 +5712,11 @@ input.add_documents {
 .account_info_block {
     text-align: right;
 }
+.empty_doc_block {
+    text-align: center;
+    font-size: 17px;
+    margin-top: 30px;
+    background-color: rgb(195, 211, 229);
+    padding: 25px;
+    line-height: 25px;
+}

@@ -79,12 +79,25 @@ class documents extends oxUBase
         }
     }
 
-    public function checkExpiredDateForPayment($paymentDate, $paymentDuration)
+    public function checkExpiredDateForPayment($paymentDate, $paymentDuration, $isProfi)
     {
-        $dueDate = strtotime('-' . $paymentDuration . 'month');
+        if ($isProfi) {
+            $dueDate = strtotime('-' . $paymentDuration . 'month');
 
-        if (strtotime($paymentDate) < $dueDate) {
-            return true;
+            if (strtotime($paymentDate) < $dueDate) {
+                return true;
+            }
+        } else {
+            $oUser = $this->getUser();
+
+            if ($oUser) {
+                $registerDate = $oUser->oxuser__oxregister->value;
+                $dueDate = strtotime('-1month');
+
+                if (strtotime($registerDate) < $dueDate) {
+                    return true;
+                }
+            }
         }
     }
 

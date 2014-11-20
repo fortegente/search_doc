@@ -19,9 +19,13 @@ class zsUser_Main extends zsUser_Main_parent
         $blisMallAdmin = $oAuthUser->oxuser__oxrights->value == "malladmin";
         $iPos = count($aUserRights);
 
+        array_shift($aUserRights);
         $aUserRights[$iPos] = new stdClass();
-        $aUserRights[$iPos]->name = 'Trial';
-        $aUserRights[$iPos]->id   = "trial_user";
+        $aUserRights[$iPos]->name = 'Trial user';
+        $aUserRights[$iPos]->id   = "oxtrial_user";
+        $aUserRights[$iPos + 1] = new stdClass();
+        $aUserRights[$iPos + 1]->name = 'Profi user';
+        $aUserRights[$iPos + 1]->id   = "oxuser";
 
         $soxId = $this->_aViewData["oxid"] = $this->getEditObjectId();
 
@@ -33,7 +37,7 @@ class zsUser_Main extends zsUser_Main_parent
             if ( !( $oUser->oxuser__oxrights->value == "malladmin" && !$blisMallAdmin ) ) {
                 reset( $aUserRights );
                 while ( list(, $val ) = each( $aUserRights ) ) {
-                    if ( $val->id == $oUser->oxuser__oxrights->value) {
+                    if ($oUser->inGroup($val->id)) {
                         $val->selected = 1;
                         break;
                     }
@@ -91,6 +95,10 @@ class zsUser_Main extends zsUser_Main_parent
             $oUser->oxuser__oxbirthdate->fldtype = 'char';
 
             try {
+                if ($aParams['oxuser__oxrights'] != 'malladmin') {
+                    $oUser->addToGroup($aParams['oxuser__oxrights']);
+                }
+
                 $oUser->save();
 
                 // set oxid if inserted

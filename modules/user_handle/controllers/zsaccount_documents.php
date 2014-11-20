@@ -140,4 +140,15 @@ class zsaccount_documents extends Account
     {
         return strtotime($lastUpdateDate) > strtotime($lastSeenDate);
     }
+
+    public function inGroup($group)
+    {
+        $oUser = $this->getUser();
+
+        if ( !$oUser ) {
+            return;
+        }
+
+        return $oUser->inGroup($group);
+    }
 }

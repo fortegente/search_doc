@@ -13,13 +13,25 @@
     <div class="account_info_block">
         <a class="back_button account-back" href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=account_user"}]">[{oxmultilang ident="BILLING_SHIPPING_SETTINGS" }]</a>
     </div>
-    [{if count($aDocuments) > 0}]
+    <a class="back_button account-back" href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=documents"}]">[{oxmultilang ident="BACK_TO_DOC" }]</a>
+    <a class="back_button account-back logout" href="[{ $oViewConf->getLogoutLink() }]">[{oxmultilang ident="LOGOUT" }]</a>
+
+    [{if count($aDocuments) == 0 && $oView->inGroup('oxuser')}]
+        <div class="empty_doc_block">
+            Тут поки що немає жодного документу. Створіть власну базу прямо зараз перейшовши на перелік документів.
+        </div>
+    [{elseif ($oView->inGroup('oxtrial_user'))}]
+        <div class="empty_doc_block">
+            Щоб мати можливість відслідковувати обрані вами документи та отримувати найсвіжішу інформацію про будь які зміни
+            змініть свій standart-info акаунт на профі. Ознайомитись детальніше с перевагами Ви можете <a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=zsprofessional"}]">тут</a>
+        </div>
+    [{/if}]
+
+    [{if count($aDocuments) > 0 && $oxcmp_user->inGroup('oxuser')}]
          <form action="[{$oViewConf->getSelfActionLink() }]" method="post">
             [{$oViewConf->getHiddenSid() }]
             <input type="hidden" name="fnc" value="removeFromFavouriteDocuments"/>
             <input type="hidden" name="cl" value="zsaccount_documents"/>
-             <a class="back_button account-back" href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=documents"}]">[{oxmultilang ident="BACK_TO_DOC" }]</a>
-             <a class="back_button account-back logout" href="[{ $oViewConf->getLogoutLink() }]">[{oxmultilang ident="LOGOUT" }]</a>
             <table id="documents_table">
                 <tr>
                     <th>[{oxmultilang ident="DOC_REMOVE_DOC" }]</th>
