@@ -32,6 +32,7 @@
             <li [{if $aErrors}]class="oxInValid"[{/if}]>
                 <label class="req">[{ oxmultilang ident="PASSWORD"}]</label>
                 <input id="loginPwd" class="js-oxValidate js-oxValidate_notEmpty textbox" type="password" name="lgn_pwd" value="" size="37">
+                <a title="не памятаю пароль" id="forgotPasswordLink" href="[{ oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=forgotpwd" }]" class="textLink" rel="nofollow">?</a>
                 <p class="oxValidateError">
                     <span class="js-oxError_notEmpty">[{ oxmultilang ident="ERROR_MESSAGE_INPUT_NOTALLFIELDS" }]</span>
                 </p>

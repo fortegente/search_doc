@@ -32,6 +32,7 @@ define( 'USER_LOGOUT', 3 );
  */
 class oxcmp_user extends oxView
 {
+    protected $_registerType = array('profi', 'expert');
     /**
      * Boolean - if user is new or not.
      * @var bool
@@ -585,7 +586,7 @@ class oxcmp_user extends oxView
     public function registerUser()
     {
         // registered new user ?
-        if ( $this->createuser()!= false && $this->_blIsNewUser ) {
+        if ( $this->createuser()!= false && $this->_blIsNewUser && in_array(oxConfig::getParameter('reg_type'), $this->_registerType)) {
             if ( $this->_blNewsSubscriptionStatus === null || $this->_blNewsSubscriptionStatus ) {
                 return 'register?success=1';
             } else {

@@ -70,5 +70,9 @@ $aLang = array(
     'BILLING_SHIPPING_SETTINGS'         => 'Змінити персональні дані',
     'SAVE_ACCOUNT_INFO'                 => 'Зберегти',
     'ERROR_MESSAGE_PASSWORD_TOO_SHORT'  => 'Пароль повинен мати щонайменше 6 символів',
-    'ERROR_MESSAGE_USER_PWDDONTMATCH'   => 'Паролі не співпадають'
+    'ERROR_MESSAGE_USER_PWDDONTMATCH'   => 'Паролі не співпадають',
+    'REQUEST_PASSWORD'                  => 'Отримати новий пароль',
+    'FORGOT_PASSWORD'                   => 'Змінити пароль',
+    'PASSWORD_WAS_SEND_TO'              => 'Пароль був висланий на мейл',
+    'BACK_TO_SHOP'                      => 'назад'
 );

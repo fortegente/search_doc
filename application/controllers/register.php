@@ -68,6 +68,10 @@ class Register extends User
      */
     public function render()
     {
+        if ($this->getUser()) {
+            oxRegistry::getUtils()->redirect('');
+        }
+
         parent::render();
 
         // checking registration status

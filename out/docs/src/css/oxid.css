@@ -5720,3 +5720,20 @@ input.add_documents {
     padding: 25px;
     line-height: 25px;
 }
+#forgotPasswordLink {
+    line-height: 30px;
+    padding-left: 10px;
+    text-decoration: none;
+    font-size: 20px;
+}
+.form label.forgot_passw {
+    width: 57px;
+    padding-right: 40px;
+    line-height: 25px;
+}
+#loginButton.forgot_pass_button {
+    width: 205px;
+}
+.forgot_pass_success {
+    background-color: rgb(68, 202, 132);
+}

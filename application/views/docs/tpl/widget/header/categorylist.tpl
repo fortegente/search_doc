@@ -14,7 +14,9 @@
     [{oxifcontent ident="oximpressum" object="_cont"}]
         <li><a href="[{$_cont->getLink() }]">[{ $_cont->oxcontents__oxtitle->value }]</a></li>
     [{/oxifcontent}]
-    <li><a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=registerinfo"}]">[{oxmultilang ident="DOCS_REGISTER"}]</a></li>
+    [{if !$oxcmp_user}]
+        <li><a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=registerinfo"}]">[{oxmultilang ident="DOCS_REGISTER"}]</a></li>
+    [{/if}]
     <li><a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=zsaccount_documents"}]">[{oxmultilang ident="DOCS_MY_BASE"}]</a></li>
 </ul>
 [{oxscript widget=$oView->getClassName()}]
