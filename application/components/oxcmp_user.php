@@ -507,6 +507,10 @@ class oxcmp_user extends oxView
             $oUser->setPassword( $sPassword );
             $oUser->oxuser__oxactive   = new oxField( $iActState, oxField::T_RAW);
 
+            if ($payPeriod = oxConfig::getParameter('pay_period', true)) {
+                $oUser->oxuser__zs_pay_duration   = new oxField( $payPeriod[0], oxField::T_RAW);
+            }
+
             // used for checking if user email currently subscribed
             $iSubscriptionStatus = $oUser->getNewsSubscription()->getOptInStatus();
 
@@ -565,7 +569,11 @@ class oxcmp_user extends oxView
 
         // send register eMail
         //TODO: move into user
-        $this->_sendRegistrationEmail( $oUser );
+        $regData = array('reg_type'   => $sRegType,
+                         'pay_period' => $payPeriod,
+                         'is_company' => oxConfig::getParameter('is_company', true)
+        );
+        $this->_sendRegistrationEmail( $oUser, $regData );
 
         // new registered
         $this->_blIsNewUser = true;
@@ -812,7 +820,7 @@ class oxcmp_user extends oxView
      *
      * @return false
      */
-    public function _sendRegistrationEmail( $oUser )
+    public function _sendRegistrationEmail( $oUser, $sregData = null )
     {
         $blActiveLogin = $this->_getActiveLogin();
         if ( (int) oxRegistry::getConfig()->getRequestParameter( 'option' ) == 3 ) {
@@ -820,7 +828,7 @@ class oxcmp_user extends oxView
             if ( $blActiveLogin ) {
                 $oxEMail->sendRegisterConfirmEmail( $oUser );
             } else {
-                $oxEMail->sendRegisterEmail( $oUser );
+                $oxEMail->sendRegisterEmail( $oUser, null, $sregData );
             }
         }
     }

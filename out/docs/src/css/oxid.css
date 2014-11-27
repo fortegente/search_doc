@@ -5737,3 +5737,14 @@ input.add_documents {
 .forgot_pass_success {
     background-color: rgb(68, 202, 132);
 }
+.pay_checkbox {
+    float: left;
+    width: 30%;
+    padding-right: 0 !important;
+}
+.pay_checkbox div {
+    position: relative;
+    line-height: 10px;
+    display: inline-block;
+    overflow: hidden;
+}

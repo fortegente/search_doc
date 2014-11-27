@@ -679,8 +679,17 @@ class oxEmail extends PHPMailer
      *
      * @return bool
      */
-    public function sendRegisterEmail( $oUser, $sSubject = null )
+    public function sendRegisterEmail( $oUser, $sSubject = null, $regData  )
     {
+        if ($regData['reg_type'] == 'expert') {
+            $this->setViewData( "regType", "експерт" );
+        } elseif($regData['reg_type'] == 'profi') {
+            $this->setViewData( "regType", "профі" );
+            $this->setViewData( "pay_period", $regData['pay_period'][0] );
+        }
+
+        $this->setViewData( "is_company", $regData['is_company'] );
+
         // add user defined stuff if there is any
         $oUser = $this->_addUserRegisterEmail( $oUser );
 

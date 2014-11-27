@@ -31,8 +31,12 @@
         if (jQuery(this).attr('class') == 'physical') {
             jQuery('table.physical').show();
             jQuery('table.legal').hide();
+            jQuery("[name='is_company']").val(0);
+
         }else {
             jQuery('table.physical').hide();
-            jQuery('table.legal').show();            }
+            jQuery('table.legal').show();
+            jQuery("[name='is_company']").val(1);
+        }
     });
 </script>

@@ -11,11 +11,11 @@ class zsEmail extends zsEmail_parent
         $this->_setMailParams($oShop);
         $oSmarty = $this->_getSmarty();
         $this->setBody($this->_getEmailHtml());
-        $this->setSubject('subject');
+        $this->setSubject('інформація про змінені документи');
 
         $this->setRecipient($userEmail, "");
-        $this->setFrom('fortegente@gmail.com', $oShop->oxshops__oxname->getRawValue());
-        $this->setReplyTo("fortegente@gmail.com", "");
+        $this->setFrom($oShop->oxshops__oxorderemail->value, $oShop->oxshops__oxname->getRawValue());
+        $this->setReplyTo( $oShop->oxshops__oxorderemail->value, $oShop->oxshops__oxname->getRawValue() );
 
         return $this->send();
     }
@@ -39,7 +39,7 @@ class zsEmail extends zsEmail_parent
 <!DOCTYPE HTML>
 <html>
   <head>
-      <title>xxx</title>
+      <title>інформація про змінені документи</title>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
 
@@ -50,7 +50,10 @@ class zsEmail extends zsEmail_parent
         <div style="padding: 10px 0;">
             <img src="[{$oViewConf->getImageUrl('logo_email.png', false)}]" border="0" hspace="0" vspace="0"" align="texttop">
         </div>
-        1111111111111111111111111111111111111111
+        Спішимо повідомити що деякі документы с Вашої базы були змінені. <br>
+        Ознайомитися з даною інформацією Ви можете перейшовши по <a target='_blank' href='http://standart-info.com'>посиланню</a><br><br>
+
+        З повагою команда standart-info.
     </div>
 
   </body>

@@ -8,6 +8,7 @@
     <input type="hidden" id="reloadAddress" name="reloadaddress" value="">
     <input type="hidden" name="option" value="3">
     <input type="hidden" name="reg_type" value="[{$reg_type}]">
+    <input type="hidden" name="is_company" value="0">
     <table class="form refister_block legal" style="display: none">
         <tbody>
             <tr>
@@ -111,6 +112,18 @@
                 </td>
                 <td></td>
             </tr>
+            [{if $reg_type == 'profi' }]
+                <tr>
+                    <td>
+                        <label class="req">[{ oxmultilang ident="PAY_PERIOD"}]</label>
+                    </td>
+                    <td colspan="2">
+                        <label class="pay_checkbox"><div><input checked type="radio" name="pay_period[]" value="3" /></div> 3 міс</label>
+                        <label class="pay_checkbox"><div><input type="radio" name="pay_period[]" value="6" /></div> 6 міс</label>
+                        <label class="pay_checkbox"><div><input type="radio" name="pay_period[]" value="12" /></div> 12 міс</label>
+                    </td>
+                </tr>
+            [{/if}]
             <tr>
                 <td colspan="3"><button id="accUserSaveTop" type="submit" name="save" class="register">[{ oxmultilang ident="REGISTER" }]</button></td>
             </tr>
