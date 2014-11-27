@@ -10,9 +10,7 @@ $aModule = array(
     'version'      => '1.0.0',
     'author'       => 'Dmitry Martyniuk',
     'email'        => 'fortegente@gmail.com',
-    'extend'       => array(
-        'register' => 'cms_pages/controllers/zsregister',
-    ),
+    'extend'       => array(),
     'files' => array(
         'zsexpert'       => 'cms_pages/controllers/zsexpert.php',
         'zsprofessional' => 'cms_pages/controllers/zsprofessional.php',

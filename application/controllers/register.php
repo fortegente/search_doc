@@ -68,10 +68,7 @@ class Register extends User
      */
     public function render()
     {
-        if ($this->getUser()) {
-            oxRegistry::getUtils()->redirect('');
-        }
-
+        $this->_aViewData['reg_type'] = oxConfig::getParameter('reg_type');
         parent::render();
 
         // checking registration status

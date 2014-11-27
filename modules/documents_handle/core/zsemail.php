@@ -9,27 +9,63 @@ class zsEmail extends zsEmail_parent
     {
         $oShop = $this->_getShop();
         $this->_setMailParams($oShop);
-        $oSmarty = $this->_getSmarty();
         $this->setBody($this->_getEmailHtml());
         $this->setSubject('інформація про змінені документи');
 
         $this->setRecipient($userEmail, "");
-        $this->setFrom($oShop->oxshops__oxorderemail->value, $oShop->oxshops__oxname->getRawValue());
         $this->setReplyTo( $oShop->oxshops__oxorderemail->value, $oShop->oxshops__oxname->getRawValue() );
 
         return $this->send();
     }
 
-    protected function _getSmarty()
+    public function sendNotificationAboutApprovePayment($oUser, $group)
     {
-        if ( $this->_oSmarty === null ) {
-            $this->_oSmarty = oxRegistry::get("oxUtilsView")->getSmarty();
+        $oShop = $this->_getShop();
+        $this->_setMailParams($oShop);
+        $this->setBody($this->_getApprovePaimentHtml($oUser, $group));
+        $this->setSubject('Підтвердження оплати');
+
+        $this->setRecipient($oUser->oxuser__oxusername->value, "");
+        $this->setReplyTo( $oShop->oxshops__oxorderemail->value, $oShop->oxshops__oxname->getRawValue() );
+
+        return $this->send();
+    }
+
+    private function _getApprovePaimentHtml($oUser)
+    {
+        if ($oUser->oxuser__is_company->value) {
+            $userName = $oUser->oxuser__oxlname->value;
+        } else {
+            $userName = $oUser->oxuser__oxfname->value . " " . $oUser->oxuser__oxlname->value;
         }
+        $oViewConf = oxNew( 'oxViewConfig' );
+        $html = <<<EOT
+<!DOCTYPE HTML>
+<html>
+  <head>
+      <title>Підтвердження оплати</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
 
-        //setting default view
-        $this->_oSmarty->assign( "oEmailView", $this );
+  <body bgcolor="#ffffff" link="#355222" alink="#18778E" vlink="#389CB4" style="font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
 
-        return $this->_oSmarty;
+    <div width="600" style="width: 600px">
+
+        <div style="padding: 10px 0;">
+            <img src="[{$oViewConf->getImageUrl('logo_email.png', false)}]" border="0" hspace="0" vspace="0"" align="texttop">
+        </div>
+        Шановний $userName!<br>
+        Оплата в системі standart-info профі пройшла успішно.<br>
+        Термін користування оплачений Вами становить $oUser->oxuser__zs_pay_duration місяців.<br>
+        Приемного користування!<br><br>
+
+        З повагою команда standart-info.
+    </div>
+  </body>
+</html>
+EOT;
+        return $html;
+
     }
 
     private function _getEmailHtml()

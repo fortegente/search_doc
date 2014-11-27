@@ -1,28 +1,23 @@
 [{capture append="oxidBlock_content"}]
     [{assign var="template_title" value="MESSAGE_WELCOME_REGISTERED_USER"|oxmultilangassign }]
-    <div id="header-info-block">
-        <h2>Реєстрація пройшла успішно</h2>
-        <span>
-            Дякуємо за реєстрацію на нашому сайті.
-        </span>
-    </div>
+    <h1 id="openAccHeader" class="pageHead">[{ oxmultilang ident="MESSAGE_WELCOME_REGISTERED_USER" }]</h1>
     <div class="box info">
-      [{if $oView->getRegistrationStatus() == 1}]
+        [{if $oView->getRegistrationStatus() == 1}]
         [{ oxmultilang ident="MESSAGE_CONFIRMING_REGISTRATION" }]<br><br>[{ oxmultilang ident="THANK_YOU" SUFFIC="." }]
-      [{elseif $oView->getRegistrationStatus() == 2}]
+        [{elseif $oView->getRegistrationStatus() == 2}]
         [{ oxmultilang ident="MESSAGE_SENT_CONFIRMATION_EMAIL" }]<br><br>[{ oxmultilang ident="THANK_YOU" SUFFIC="." }]
-      [{/if}]
+        [{/if}]
 
-      [{if $oView->getRegistrationError() == 4}]
+        [{if $oView->getRegistrationError() == 4}]
         <div>
-          [{ oxmultilang ident="MESSAGE_NOT_ABLE_TO_SEND_EMAIL" }]<br>[{ oxmultilang ident="MESSAGE_VERIFY_YOUR_EMAIL" }]
+            [{ oxmultilang ident="MESSAGE_NOT_ABLE_TO_SEND_EMAIL" }]<br>[{ oxmultilang ident="MESSAGE_VERIFY_YOUR_EMAIL" }]
         </div>
-      [{/if}]
+        [{/if}]
     </div>
     [{ insert name="oxid_tracker" title=$template_title }]
-[{/capture}]
+    [{/capture}]
 [{if $oView->isActive('PsLogin') }]
     [{include file="layout/popup.tpl"}]
-[{else}]
+    [{else}]
     [{include file="layout/page.tpl" sidebar="Left"}]
-[{/if}]
+    [{/if}]

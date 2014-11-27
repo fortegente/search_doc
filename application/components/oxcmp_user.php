@@ -511,6 +511,10 @@ class oxcmp_user extends oxView
                 $oUser->oxuser__zs_pay_duration   = new oxField( $payPeriod[0], oxField::T_RAW);
             }
 
+            if ($isCompany = oxConfig::getParameter('is_company', true)) {
+                $oUser->oxuser__is_company   = new oxField( (int)$isCompany, oxField::T_RAW);
+            }
+
             // used for checking if user email currently subscribed
             $iSubscriptionStatus = $oUser->getNewsSubscription()->getOptInStatus();
 
@@ -571,7 +575,6 @@ class oxcmp_user extends oxView
         //TODO: move into user
         $regData = array('reg_type'   => $sRegType,
                          'pay_period' => $payPeriod,
-                         'is_company' => oxConfig::getParameter('is_company', true)
         );
         $this->_sendRegistrationEmail( $oUser, $regData );
 

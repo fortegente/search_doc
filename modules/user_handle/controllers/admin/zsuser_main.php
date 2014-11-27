@@ -21,11 +21,11 @@ class zsUser_Main extends zsUser_Main_parent
 
         array_shift($aUserRights);
         $aUserRights[$iPos] = new stdClass();
-        $aUserRights[$iPos]->name = 'Trial user';
-        $aUserRights[$iPos]->id   = "oxtrial_user";
+        $aUserRights[$iPos]->name = 'Profi user';
+        $aUserRights[$iPos]->id   = "oxuser";
         $aUserRights[$iPos + 1] = new stdClass();
-        $aUserRights[$iPos + 1]->name = 'Profi user';
-        $aUserRights[$iPos + 1]->id   = "oxuser";
+        $aUserRights[$iPos + 1]->name = 'Trial user';
+        $aUserRights[$iPos + 1]->id   = "oxtrial_user";
 
         $soxId = $this->_aViewData["oxid"] = $this->getEditObjectId();
 
@@ -81,8 +81,7 @@ class zsUser_Main extends zsUser_Main_parent
             }
 
 
-            if (($aParams['oxuser__zs_pay_duration'] && $aParams['oxuser__oxid'] && !$oUser->oxuser__zs_pay_date->value) ||
-                ($aParams['oxuser__zs_pay_duration'] && $aParams['update_pay_date'])) {
+            if ($aParams['oxuser__zs_pay_duration'] && $aParams['update_pay_date'] && $aParams['oxuser__oxid']) {
                 $aParams['oxuser__zs_pay_date'] = date('Y-m-d');
             } elseif (!$aParams['oxuser__zs_pay_duration']) {
                 $aParams['oxuser__zs_pay_date'] = null;
@@ -100,6 +99,12 @@ class zsUser_Main extends zsUser_Main_parent
                 }
 
                 $oUser->save();
+
+                if ($aParams['oxuser__zs_pay_duration'] && $aParams['update_pay_date'] && $aParams['oxuser__oxid']) {
+                    $oEmail = oxNew('oxemail');
+                    $oEmail->sendNotificationAboutApprovePayment($oUser);
+                }
+
 
                 // set oxid if inserted
                 $this->setEditObjectId( $oUser->getId() );
