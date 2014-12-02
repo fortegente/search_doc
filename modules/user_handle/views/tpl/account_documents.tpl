@@ -20,7 +20,7 @@
         <div class="empty_doc_block">
             Тут поки що немає жодного документу. Створіть власну базу прямо зараз перейшовши на перелік документів.
         </div>
-    [{elseif ($oView->inGroup('oxtrial_user'))}]
+    [{elseif $oView->inGroup('oxtrial_user') && !$oView->inGroup('oxuser')}]
         <div class="empty_doc_block">
             Щоб мати можливість відслідковувати обрані вами документи та отримувати найсвіжішу інформацію про будь які зміни
             змініть свій standart-info акаунт на профі. Ознайомитись детальніше с перевагами Ви можете <a href="[{oxgetseourl ident=$oViewConf->getSelfLink()|cat:"cl=zsprofessional"}]">тут</a>
