@@ -49,6 +49,12 @@ class Account_User extends Account
 
         parent::render();
 
+        if (oxSession::getVar('isUpdated')) {
+            $this->_aViewData["isUpdated"] = 1;
+        }
+
+        oxSession::deleteVar('isUpdated');
+
         // is logged in ?
         if ( !( $this->getUser() ) ) {
             return $this->_sThisTemplate = $this->_sThisLoginTemplate;
@@ -86,5 +92,25 @@ class Account_User extends Account
         $aPaths[] = $aPath;
 
         return $aPaths;
+    }
+
+    public function getPaymentExpiredDate($isProfi)
+    {
+        $oUser = $this->getUser();
+
+        if ( !$oUser ) {
+            return;
+        }
+
+        if ($isProfi) {
+            $paidTime = strtotime($oUser->oxuser__zs_pay_date->value);
+            $final = date("d-m-Y", strtotime("+" . $oUser->oxuser__zs_pay_duration->value . " month", $paidTime));
+        } else {
+            $paidTime = strtotime($oUser->oxuser__oxregister->value);
+            $final = date("d-m-Y", strtotime("-1month", $paidTime));
+        }
+
+
+        return $final;
     }
 }

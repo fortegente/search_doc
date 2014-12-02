@@ -60,9 +60,9 @@
                     [{if $oxcmp_user && !$paymentExpired && $isProfi}]
                         <th><input type="checkbox" class="check_all"></th>
                     [{/if}]
-                    <th [{if !$oxcmp_user}] style="width: 13%"; [{/if}]>[{oxmultilang ident="DOC_PRIMARY_NUMBER" }]</th>
-                    <th  [{if !$oxcmp_user}] style="width: 19%"; [{else}] style="width: 8%;" [{/if}]>[{oxmultilang ident="DOC_MARKING" }]</th>
-                    <th [{if !$oxcmp_user}] style="width: 60%"; [{else}] style="width: 30%;" [{/if}]>[{oxmultilang ident="DOC_NAME" }]</th>
+                    <th [{if !$oxcmp_user || $paymentExpired}] style="width: 13%"; [{/if}]>[{oxmultilang ident="DOC_PRIMARY_NUMBER" }]</th>
+                    <th  [{if !$oxcmp_user || $paymentExpired}] style="width: 19%"; [{else}] style="width: 8%;" [{/if}]>[{oxmultilang ident="DOC_MARKING" }]</th>
+                    <th [{if !$oxcmp_user || $paymentExpired}] style="width: 60%"; [{else}] style="width: 30%;" [{/if}]>[{oxmultilang ident="DOC_NAME" }]</th>
                     [{if $oxcmp_user && !$paymentExpired}]
                         <th style="width: 8%;">[{oxmultilang ident="DOC_CHANGING" }]</th>
                         <th>[{oxmultilang ident="DOC_PAGES" }]</th>

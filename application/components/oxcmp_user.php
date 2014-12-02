@@ -33,6 +33,7 @@ define( 'USER_LOGOUT', 3 );
 class oxcmp_user extends oxView
 {
     protected $_registerType = array('profi', 'expert');
+
     /**
      * Boolean - if user is new or not.
      * @var bool
@@ -644,6 +645,13 @@ class oxcmp_user extends oxView
         $sPassword  = $sPassword2 = $oUser->oxuser__oxpassword->value;
 
         try { // testing user input
+            if ($payPeriod = oxConfig::getParameter('pay_period', true)) {
+                if (!$this->inGroup('oxuser')) {
+                    $oUser->addToGroup('oxuser');
+                }
+
+                $oUser->oxuser__zs_pay_duration   = new oxField($payPeriod[0] + $oUser->oxuser__zs_pay_duration->value, oxField::T_RAW);
+            }
             $oUser->changeUserData( $sUserName, $sPassword, $sPassword2, $aInvAdress, $aDelAdress );
             // assigning to newsletter
             if (($blOptin = oxConfig::getParameter( 'blnewssubscribed' )) === null) {
@@ -667,8 +675,7 @@ class oxcmp_user extends oxView
             oxRegistry::get("oxUtilsView")->addErrorToDisplay($oEx, false, true);
             return;
         }
-
-
+        oxSession::setVar('isUpdated', 1);
         // order remark
         $sOrderRemark = oxConfig::getParameter( 'order_remark', true );
 
@@ -834,16 +841,5 @@ class oxcmp_user extends oxView
                 $oxEMail->sendRegisterEmail( $oUser, null, $sregData );
             }
         }
-    }
-
-    public function inGroup($group)
-    {
-        $oUser = $this->getUser();
-
-        if ( !$oUser ) {
-            return;
-        }
-
-        return $oUser->inGroup($group);
     }
 }

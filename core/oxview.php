@@ -1041,4 +1041,37 @@ class oxView extends oxSuperCfg
         return $sRet;
     }
 
+    public function inGroup($group)
+    {
+        $oUser = $this->getUser();
+
+        if ( !$oUser ) {
+            return;
+        }
+
+        return $oUser->inGroup($group);
+    }
+
+    public function checkExpiredDateForPayment($paymentDate, $paymentDuration, $isProfi)
+    {
+        if ($isProfi) {
+            $dueDate = strtotime('-' . $paymentDuration . 'month');
+
+            if (strtotime($paymentDate) < $dueDate) {
+                return true;
+            }
+        } else {
+            $oUser = $this->getUser();
+
+            if ($oUser) {
+                $registerDate = $oUser->oxuser__oxregister->value;
+                $dueDate = strtotime('-1month');
+
+                if (strtotime($registerDate) < $dueDate) {
+                    return true;
+                }
+            }
+        }
+    }
+
 }

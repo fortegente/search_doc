@@ -79,5 +79,10 @@ $aLang = array(
     'PAY_PERIOD'                        => 'передплачений період',
     'CHANGE_PASSWORD'                   => 'Змінити пароль',
     'PASSWORD_CHANGED'                  => 'Пароль був успішно змінений',
-    'PASSWORD_LINK_EXPIRED'             => 'Посилання з якого Ви перейшли устаріло'
+    'PASSWORD_LINK_EXPIRED'             => 'Посилання з якого Ви перейшли устаріло',
+    'MESSAGE_WELCOME_REGISTERED_USER'   => 'Реєстрація пройшла успішно!',
+    'UPDATE_ACCOUNT_MESSAGE'            => 'Дані успішно оновлені!',
+    'PROLONG_ACCOUNT'                   => 'Пролонгувати акаунт',
+    'PROLONG_PERIOD'                    => 'Пролонгувати на період',
+    'WANT_TO_CREATE_ACCOUNT'            => 'Придбати профі акаунт'
 );

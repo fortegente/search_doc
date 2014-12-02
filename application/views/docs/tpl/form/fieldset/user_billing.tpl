@@ -73,6 +73,36 @@
     </tbody>
 </table>
 
+<table class="form refister_block physical">
+    <tbody>
+    <tr>
+        [{if $oView->inGroup('oxuser')}]
+            <td>
+                <label class="req">[{ oxmultilang ident="PROLONG_PERIOD"}]</label>
+            </td>
+        [{else}]
+            <td>
+                <label class="req">[{ oxmultilang ident="PAY_PERIOD"}]</label>
+            </td>
+        [{/if}]
+        <td colspan="2">
+            <label class="pay_checkbox"><div><input type="radio" name="pay_period[]" value="3" /></div> 3 міс</label>
+            <label class="pay_checkbox"><div><input type="radio" name="pay_period[]" value="6" /></div> 6 міс</label>
+            <label class="pay_checkbox"><div><input type="radio" name="pay_period[]" value="12" /></div> 12 міс</label>
+        </td>
+    </tr>
+    [{if $oView->inGroup('oxuser')}]
+        <tr>
+            <td colspan="3"><button  style="width: 190px" id="accUserSaveTop" type="submit" name="save" class="register">[{ oxmultilang ident="PROLONG_ACCOUNT" }]</button></td>
+        </tr>
+    [{else}]
+        <tr>
+            <td colspan="3"><button  style="width: 200px" id="accUserSaveTop" type="submit" name="save" class="register">[{ oxmultilang ident="WANT_TO_CREATE_ACCOUNT" }]</button></td>
+        </tr>
+    [{/if}]
+    </tbody>
+</table>
+
 [{if !$noFormSubmit}]
     <li class="formSubmit">
         <button id="accUserSaveTop" type="submit" name="save" class="register">[{ oxmultilang ident="SAVE" }]</button>
