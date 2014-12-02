@@ -5748,3 +5748,6 @@ input.add_documents {
     display: inline-block;
     overflow: hidden;
 }
+.info-block {
+    text-indent: 1.5em;
+}
