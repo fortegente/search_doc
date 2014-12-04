@@ -1675,7 +1675,7 @@ a.submitButton {
 }
 
 /* --- main navigation menu ------------------- */
-#navigation {padding-top: 45px; float:right; width: 890px}
+#navigation {padding-top: 45px; float:right; width: 905px}
 #navigation a {
     text-decoration: none;
 }
@@ -1686,8 +1686,8 @@ a.submitButton {
 .sf-menu > li {
     border-radius: 0px;
     border-right: 1px solid black;
-    margin-right: 10px;
-    padding-right: 10px;
+    margin-right: 8px;
+    padding-right: 8px;
 }
 .sf-menu :last-child {
     border-right: none;
@@ -5433,6 +5433,14 @@ a.downloadableFile.pending {
 #documents_table tr:nth-child(even) {
     background: #9FB7C7;
 }
+#documents_table.catalogs_collection_table a {
+    font-weight: bold;
+}
+#documents_table.catalogs_collection_table th {
+    text-transform: uppercase;
+    padding: 10px;
+    color: rgb(46, 83, 115);;
+}
 #documents_table small {
     font-size: 13px;
     color: rgb(102, 102, 102);
@@ -5750,4 +5758,11 @@ input.add_documents {
 }
 .info-block {
     text-indent: 1.5em;
+}
+.underline_text {
+    text-decoration: underline;
+}
+.emphasise {
+    text-indent: 0;
+    color: rgb(69, 112, 131);
 }
