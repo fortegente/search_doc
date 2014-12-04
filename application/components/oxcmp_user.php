@@ -676,6 +676,15 @@ class oxcmp_user extends oxView
             return;
         }
         oxSession::setVar('isUpdated', 1);
+
+        if (oxConfig::getParameter('save') == 'prolong' && $payPeriod) {
+            $oEmail = oxNew('oxemail');
+            $oEmail->sendNotificationAboutProlong($payPeriod[0], $oUser);
+        } elseif(oxConfig::getParameter('save') == 'create_account') {
+            $oEmail = oxNew('oxemail');
+            $oEmail->sendNotificationAboutChangeAcount($payPeriod[0], $oUser);
+        }
+
         // order remark
         $sOrderRemark = oxConfig::getParameter( 'order_remark', true );
 

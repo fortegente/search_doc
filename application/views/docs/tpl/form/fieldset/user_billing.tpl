@@ -93,11 +93,11 @@
     </tr>
     [{if $oView->inGroup('oxuser')}]
         <tr>
-            <td colspan="3"><button  style="width: 190px" id="accUserSaveTop" type="submit" name="save" class="register">[{ oxmultilang ident="PROLONG_ACCOUNT" }]</button></td>
+            <td colspan="3"><button  style="width: 190px" id="accUserSaveTop" type="submit" name="save" value="prolong" class="register">[{ oxmultilang ident="PROLONG_ACCOUNT" }]</button></td>
         </tr>
     [{else}]
         <tr>
-            <td colspan="3"><button  style="width: 200px" id="accUserSaveTop" type="submit" name="save" class="register">[{ oxmultilang ident="WANT_TO_CREATE_ACCOUNT" }]</button></td>
+            <td colspan="3"><button  style="width: 200px" id="accUserSaveTop" type="submit" name="save" value="create_account" class="register">[{ oxmultilang ident="WANT_TO_CREATE_ACCOUNT" }]</button></td>
         </tr>
     [{/if}]
     </tbody>
