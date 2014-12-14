@@ -3,6 +3,12 @@ class import extends oxAdminView
 {
     protected $_sThisTemplate = 'import.tpl';
 
+    protected $_documentsInDb = array();
+
+    protected $_changedDocumentsId = array();
+
+    protected $_isCancelUpdate = 0;
+
     protected $_sCsvFilePath = null;
 
     protected $_mapping = array(
@@ -23,35 +29,61 @@ class import extends oxAdminView
         $oConfig = $this->getConfig();
 
         if ($oConfig->getParameter('run')) {
-            $this->_prepareAndRunImport();
-            $this->_deleteCsvFile();
+            $this->_run();
         }
 
         return parent::render();
     }
 
-    private function _prepareAndRunImport()
+    private function _run()
     {
-        $result = null;
+        $this->_beforeImport();
+        $this->_import();
+        $this->_afterImport();
+    }
+
+    private function _beforeImport()
+    {
         $oConfig = $this->getConfig();
         $strDelimeter = $oConfig->getParameter('string_delimeter');
         $fieldDelimeter = $oConfig->getParameter('field_delimeter');
+        $isCancelUpdate = $oConfig->getParameter('cancel');
+        $this->_isCancelUpdate = $isCancelUpdate ? 1 : 0;
 
         if ($_FILES['csvfile']['name'] && $strDelimeter && $fieldDelimeter) {
-            $this->run($strDelimeter, $fieldDelimeter);
+            $this->_prepareDataForImport($this->_getUploadedCsvFilePath(), $strDelimeter, $fieldDelimeter);
+            if (count($this->_aData)) {
+                $this->_getAllDocumentsFromDb();
+            }
         } else {
             $oEx = oxNew( "oxExceptionToDisplay" );
             $oEx->setMessage('DOCS_ERRORUPLOADINGFILE');
             oxRegistry::get("oxUtilsView")->addErrorToDisplay( $oEx, false, true, 'docimport' );
         }
-
-        return $result;
     }
 
-    public function run($strDelimeter, $fieldDelimeter)
+    private function _import()
     {
-        $this->_prepareDataForImport($this->_getUploadedCsvFilePath(), $strDelimeter, $fieldDelimeter);
-        $this->doImport();
+        if (!count($this->_aData)) {
+            $oEx = oxNew( "oxExceptionToDisplay" );
+            $oEx->setMessage('DOCS_EMPTY_FILE');
+            oxRegistry::get("oxUtilsView")->addErrorToDisplay( $oEx, false, true, 'docimport' );
+
+            return;
+        }
+
+        $result = $this->_insertDocumentsToDatabase();
+        $this->_aViewData['result'] = $result;
+    }
+
+    protected function _afterImport()
+    {
+        foreach ($this->_changedDocumentsId as $documentId) {
+            $oDocuments = oxNew("zsDocuments");
+            $oDocuments->sendNotificationToUser($documentId);
+        }
+
+        $this->_deleteCsvFile();
     }
 
     protected function _getUploadedCsvFilePath()
@@ -71,53 +103,38 @@ class import extends oxAdminView
         }
     }
 
-    public function doImport()
+    private function _getAllDocumentsFromDb()
     {
-        if (!count($this->_aData)) {
-            $oEx = oxNew( "oxExceptionToDisplay" );
-            $oEx->setMessage('DOCS_EMPTY_FILE');
-            oxRegistry::get("oxUtilsView")->addErrorToDisplay( $oEx, false, true, 'docimport' );
+        $oDb = oxDb::getDb();
 
-            return;
+        if (!$this->_isCancelUpdate) {
+            $sQ = "select oxid, marking, name, changing, pages, replace_cancel, replace_name, available_from, available_to, decree from zsdocuments";
+        } else {
+            $sQ = "select oxid, state from zsdocuments";
         }
 
-        $result = $this->_insertDocumentsToDatabase();
-        $this->_aViewData['result'] = $result;
+        $result = $oDb->getAssoc($sQ);
+
+        foreach ($result as $oxid => $values) {
+            $this->_documentsInDb[trim($oxid)] = $values;
+        }
     }
 
     private function _prepareDataForImport($sPath, $strDelimeter, $fieldDelimeter)
     {
         $iMaxLineLength = 8192;
         $file = @fopen($sPath, "r");
+        $i = 0;
 
         if (isset($file) && $file) {
             while (($aRow = fgetcsv( $file, $iMaxLineLength, $fieldDelimeter, $strDelimeter)) !== false ) {
-                if (!$this->_aData) {
-                    $this->_aData[] = $aRow;
-                    continue;
-                }
-
-                $lastElement = $this->_aData[count($this->_aData) - 1];
-
-                if (count($aRow) < 17 || count($lastElement) < 17) {
-                    if (count($lastElement) < 17) {
-                        $firstEl = array_shift($aRow);
-                        $lastCell = $lastElement[count($lastElement) - 1];
-                        $lastElement[count($lastElement) - 1] = $lastCell . "\r\n " . $firstEl;
-                        $this->_aData[count($this->_aData) - 1] = $lastElement;
-
-                        foreach ($aRow as $value) {
-                            array_push($this->_aData[count($this->_aData) - 1], $value);
-                        }
-                    } else {
-                        $this->_aData[] = $aRow;
-                    }
-                } else {
-                    $this->_aData[] = $aRow;
-                }
+                if ($i == 0) {$i++;continue;}
+                $this->_aData[] = $aRow;
             }
-            array_shift($this->_aData);
 
+            if (count($this->_aData)) {
+                array_shift($this->_aData);
+            }
         } else {
             $oEx = oxNew( "oxExceptionToDisplay" );
             $oEx->setMessage('DOCS_ERROR_UPLOAD_FILE');
@@ -129,32 +146,32 @@ class import extends oxAdminView
 
     private function _insertDocumentsToDatabase()
     {
-        $firstItemSkip = true;
         $oDb = oxDb::getDb();
         $mapping = $this->_mapping;
         $count = 0;
+        $alreadyInsertedId = array();
 
         foreach ($this->_aData as $value) {
-            if ($firstItemSkip) {
-                $firstItemSkip = false;
-                continue;
-            }
-            $sSql = "INSERT INTO zsdocuments (oxid, marking, name, changing, pages, state, replace_cancel, replace_name, available_from, available_to, decree)
+            $isChanged = $this->_checkIfDocumentsChanged($value);
+
+            if ($isChanged) {
+                if (!$this->_isCancelUpdate) {
+                    $sSql = "INSERT INTO zsdocuments (oxid, marking, name, changing, pages, state, replace_cancel, replace_name, available_from, available_to, decree)
                      VALUES(" .
-                                $oDb->quote($value[$mapping['oxid']]) . "," .
-                                $oDb->quote($value[$mapping['marking']]) . "," .
-                                $oDb->quote($value[$mapping['name']]) . "," .
-                                $oDb->quote($value[$mapping['changing']]) . "," .
-                                $oDb->quote($value[$mapping['pages']]) . "," .
-                                "'Діє'," .
-                                $oDb->quote($value[$mapping['replace_cancel']]) . "," .
-                                $oDb->quote($value[$mapping['replace_name']]) . "," .
-                                $oDb->quote($value[$mapping['available_from']]) . "," .
-                                $oDb->quote($value[$mapping['available_to']]) . "," .
-                                $oDb->quote($value[$mapping['decree']]) .
-                    ")
-                     ON DUPLICATE KEY UPDATE
-                                marking = " . $oDb->quote($value[$mapping['marking']]) . ",
+                        $oDb->quote(trim($value[$mapping['oxid']])) . "," .
+                        $oDb->quote($value[$mapping['marking']]) . "," .
+                        $oDb->quote($value[$mapping['name']]) . "," .
+                        $oDb->quote($value[$mapping['changing']]) . "," .
+                        $oDb->quote($value[$mapping['pages']]) . "," .
+                        "'Діє'," .
+                        $oDb->quote($value[$mapping['replace_cancel']]) . "," .
+                        $oDb->quote($value[$mapping['replace_name']]) . "," .
+                        $oDb->quote($value[$mapping['available_from']]) . "," .
+                        $oDb->quote($value[$mapping['available_to']]) . "," .
+                        $oDb->quote($value[$mapping['decree']]) .
+                        ")
+                         ON DUPLICATE KEY UPDATE
+                                    marking = " . $oDb->quote($value[$mapping['marking']]) . ",
                                 name = " . $oDb->quote($value[$mapping['name']]) . ",
                                 changing = " . $oDb->quote($value[$mapping['changing']]) . ",
                                 pages = " . $oDb->quote($value[$mapping['pages']]) . ",
@@ -164,11 +181,64 @@ class import extends oxAdminView
                                 available_from = " . $oDb->quote($value[$mapping['available_from']]) . ",
                                 available_to = " . $oDb->quote($value[$mapping['available_to']]) . ",
                                 decree = " . $oDb->quote($value[$mapping['decree']]);
-            $oDb->execute( $sSql );
-            $count++;
+                } else {
+                   if (in_array(trim($value[0]), $alreadyInsertedId)) {
+                       continue;
+                   }
+
+                   if (in_array(trim($value[0]), $this->_changedDocumentsId)) {
+                       $sSql = "UPDATE zsdocuments SET state='Не діє', replace_name=" . $oDb->quote($value[1]) . " WHERE oxid = " . $oDb->quote(trim($value[0]));
+                   } else {
+                       $alreadyInsertedId[] = trim($value[0]);
+                       $sSql = "INSERT INTO zsdocuments (oxid, marking, name, changing, pages, state, replace_cancel, replace_name, available_from, available_to, decree, decree_cancel)
+                 VALUES(" .
+                       $oDb->quote(trim($value[0])) . ", '', '', '', '', 'Не діє', '', " . $oDb->quote($value[1]) . ", '', '', '', " . $oDb->quote($value[3]) . ")";
+                   }
+                }
+                $oDb->execute( $sSql );
+                $count++;
+            }
         }
 
         return $count;
+    }
+
+    protected function _checkIfDocumentsChanged($newDocumentData)
+    {
+        $documentsInDb = $this->_documentsInDb;
+
+        if (!$this->_isCancelUpdate) {
+            $dbFieldsMapping = array('marking', 'name', 'changing', 'pages', 'replace_cancel', 'replace_name', 'available_from', 'available_to', 'decree');
+            $mapping = $this->_mapping;
+            $currentDocId = trim($newDocumentData[$mapping['oxid']]);
+            if (isset($documentsInDb[$currentDocId])) {
+                $docToCheck = $documentsInDb[$currentDocId];
+
+                foreach ($docToCheck as $key => $fieldInDb) {
+                    if (md5($fieldInDb) != md5($newDocumentData[$mapping[$dbFieldsMapping[$key]]])) {
+                        $this->_changedDocumentsId[] = $currentDocId;
+                        return true;
+                    }
+                }
+            } else {
+                return true;
+            }
+        } else {
+            $currentDocId = trim($newDocumentData[0]);
+            if (strlen($currentDocId) > 250) {
+                return;
+            }
+
+            if (isset($documentsInDb[$currentDocId])) {
+                if (md5($documentsInDb[$currentDocId]) != md5('Не діє')) {
+                    $this->_changedDocumentsId[] = $currentDocId;
+
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        }
     }
 
     protected function _deleteCsvFile()

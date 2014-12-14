@@ -22,10 +22,10 @@ class zsDocuments extends oxBase
         return false;
     }
 
-    public function onChange($sAction, $sOXID = null)
+    public function onChange($sAction = null, $sOXID = null)
     {
         if ($sAction == ACTION_UPDATE && $this->_documentWasChanged()) {
-            $this->_sendNotificationToUser();
+            $this->sendNotificationToUser();
         }
     }
 
@@ -48,9 +48,9 @@ class zsDocuments extends oxBase
         return md5($initFieldValue) != md5($actualFieldValue);
     }
 
-    private function _sendNotificationToUser()
+    public function sendNotificationToUser($documentId = null)
     {
-        $documentId = $this->zsdocuments__oxid->value;
+        $documentId = $documentId ? $documentId : $this->zsdocuments__oxid->value;
         $userEmailCollection =$this->getDocumentsOwners($documentId);
         $oEmail = oxNew('oxemail');
         foreach ($userEmailCollection as $userEmail) {

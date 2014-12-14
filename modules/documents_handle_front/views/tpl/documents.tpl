@@ -61,13 +61,13 @@
                         <th><input type="checkbox" class="check_all"></th>
                     [{/if}]
                     <th [{if !$oxcmp_user || $paymentExpired}] style="width: 13%"; [{/if}]>[{oxmultilang ident="DOC_PRIMARY_NUMBER" }]</th>
-                    <th  [{if !$oxcmp_user || $paymentExpired}] style="width: 19%"; [{else}] style="width: 8%;" [{/if}]>[{oxmultilang ident="DOC_MARKING" }]</th>
+                    <th  [{if !$oxcmp_user || $paymentExpired}] style="width: 14%"; [{else}] style="width: 9%;" [{/if}]>[{oxmultilang ident="DOC_MARKING" }]</th>
                     <th [{if !$oxcmp_user || $paymentExpired}] style="width: 60%"; [{else}] style="width: 30%;" [{/if}]>[{oxmultilang ident="DOC_NAME" }]</th>
                     [{if $oxcmp_user && !$paymentExpired}]
                         <th style="width: 8%;">[{oxmultilang ident="DOC_CHANGING" }]</th>
                         <th>[{oxmultilang ident="DOC_PAGES" }]</th>
                     [{/if}]
-                    <th>[{oxmultilang ident="DOC_STATE" }]</th>
+                    <th [{if !$oxcmp_user || $paymentExpired}] style="width: 5%"[{/if}]>[{oxmultilang ident="DOC_STATE" }]</th>
                     [{if $oxcmp_user && !$paymentExpired}]
                         <th>[{oxmultilang ident="DOC_CANCEL" }]</th>
                         <th>[{oxmultilang ident="DOC_REPLACE" }]</th>
@@ -87,8 +87,8 @@
                                 [{$part}]<br>
                             [{/foreach}]
                         </td>
-                        <td>[{$document->zsdocuments__oxid->value}]</td>
-                        <td>[{$document->zsdocuments__name->value}]</td>
+                        <td class="custom_cell">[{$document->zsdocuments__oxid->value}]</td>
+                        <td class="custom_cell">[{$document->zsdocuments__name->value}]</td>
                         [{if $oxcmp_user && !$paymentExpired}]
                             <td>[{$document->zsdocuments__changing->value}]</td>
                             <td>[{$document->zsdocuments__pages->value}]</td>
@@ -99,7 +99,15 @@
                             <td>[{$document->zsdocuments__replace_name->value}]</td>
                             <td>[{$document->zsdocuments__available_from->value}]</td>
                             <td>[{$document->zsdocuments__available_to->value}]</td>
-                            <td>[{$document->zsdocuments__decree->value}]</td>
+                            <td>
+                                [{if $document->zsdocuments__decree->value && $document->zsdocuments__decree_cancel->value}]
+                                    [{$document->zsdocuments__decree->value}] / [{$document->zsdocuments__decree_cancel->value}]
+                                [{elseif $document->zsdocuments__decree->value}]
+                                    [{$document->zsdocuments__decree->value}]
+                                [{elseif $document->zsdocuments__decree_cancel->value}]
+                                    [{$document->zsdocuments__decree_cancel->value}]
+                                [{/if}]
+                            </td>
                         [{/if}]
                     </tr>
                 [{/foreach}]

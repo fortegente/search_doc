@@ -66,8 +66,8 @@
                                 [{$part}]<br>
                             [{/foreach}]
                         </td>
-                        <td>[{$document->zsdocuments__oxid->value}]</td>
-                        <td>[{$document->zsdocuments__name->value}]</td>
+                        <td class="custom_cell">[{$document->zsdocuments__oxid->value}]</td>
+                        <td class="custom_cell">[{$document->zsdocuments__name->value}]</td>
                         <td>[{$document->zsdocuments__changing->value}]</td>
                         <td>[{$document->zsdocuments__pages->value}]</td>
                         <td>[{$document->zsdocuments__state->value}]</td>

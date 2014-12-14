@@ -5766,3 +5766,7 @@ input.add_documents {
     text-indent: 0;
     color: rgb(69, 112, 131);
 }
+.custom_cell {
+    font-weight: bold !important;
+    text-align: left !important;
+}

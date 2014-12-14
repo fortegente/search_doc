@@ -18,5 +18,6 @@
     <input type="text" value='"' name="string_delimeter" /><br/>
     <input type="text" value='#' name="field_delimeter" /><br/>
     <input type="file" value="choose file for import" name="csvfile" /><br/>
+    <input type="checkbox" value="1" name="cancel" /><br/>
     <input type="submit" value="Save" name="run" class="edittext">
 </form>
