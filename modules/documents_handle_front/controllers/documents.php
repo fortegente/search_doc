@@ -182,4 +182,27 @@ class documents extends oxUBase
 
         return $pageNavigation;
     }
+
+    protected function _addPageNrParam( $sUrl, $iPage, $iLang = null )
+    {
+        $filterParam = $searchParam = oxConfig::getParameter('nd');
+
+        if ( $iPage ) {
+            if ( ( strpos( $sUrl, 'pgNr=' ) ) ) {
+                $sUrl = preg_replace('/pgNr=[0-9]*/', 'pgNr='.$iPage, $sUrl);
+            } else {
+                $sUrl .= ( ( strpos( $sUrl, '?' ) === false ) ? '?' : '&amp;' ) . 'pgNr='.$iPage;
+            }
+        } else {
+            $sUrl = preg_replace('/pgNr=[0-9]*/', '', $sUrl);
+            $sUrl = preg_replace('/\&amp\;\&amp\;/', '&amp;', $sUrl);
+            $sUrl = preg_replace('/\?\&amp\;/', '?', $sUrl);
+            $sUrl = preg_replace('/\&amp\;$/', '', $sUrl);
+        }
+
+        if ($filterParam) {
+            $sUrl .= '&nd=' . $filterParam;
+        }
+        return $sUrl;
+    }
 }
