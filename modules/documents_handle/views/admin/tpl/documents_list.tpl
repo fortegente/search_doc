@@ -33,12 +33,12 @@
                 <tr class="listitem">
                     <td valign="top" class="listfilter first" height="20">
                         <div class="r1"><div class="b1">
-                                <input class="listedit" type="text" size="20" maxlength="128" name="where[zsdocuments][oxid]" value="[{ $where.zsdocuments.oxid }]">
+                                <input class="listedit" type="text" size="20" maxlength="128" name="where[zsdocuments][marking]" value="[{ $where.zsdocuments.marking }]">
                             </div></div>
                     </td>
                     <td valign="top" class="listfilter">
                         <div class="r1"><div class="b1">
-                                <input class="listedit" type="text" size="20" maxlength="128" name="where[zsdocuments][marking]" value="[{ $where.zsdocuments.marking }]">
+                                <input class="listedit" type="text" size="20" maxlength="128" name="where[zsdocuments][oxid]" value="[{ $where.zsdocuments.oxid }]">
                             </div></div>
                     </td>
                     <td valign="top" class="listfilter">
@@ -55,8 +55,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="listheader first" height="15">&nbsp;<a href="Javascript:top.oxid.admin.setSorting( document.search, 'zsdocuments', 'oxid', 'asc');document.search.submit();" class="listheader">[{oxmultilang ident="DOC_PRIMARY_NUMBER" }]</a></td>
-                    <td class="listheader"><a href="Javascript:top.oxid.admin.setSorting( document.search, 'zsdocuments', 'marking', 'asc');document.search.submit();" class="listheader">[{oxmultilang ident="DOC_MARKING" }]</a></td>
+                    <td class="listheader first" height="15">&nbsp;<a href="Javascript:top.oxid.admin.setSorting( document.search, 'zsdocuments', 'marking', 'asc');document.search.submit();" class="listheader">[{oxmultilang ident="DOC_PRIMARY_NUMBER" }]</a></td>
+                    <td class="listheader"><a href="Javascript:top.oxid.admin.setSorting( document.search, 'zsdocuments', 'oxid', 'asc');document.search.submit();" class="listheader">[{oxmultilang ident="DOC_MARKING" }]</a></td>
                     <td class="listheader"><a href="Javascript:top.oxid.admin.setSorting( document.search, 'zsdocuments', 'name', 'asc');document.search.submit();" class="listheader">[{oxmultilang ident="DOC_NAME" }]</a></td>
                     <td class="listheader" colspan="2"><a href="Javascript:top.oxid.admin.setSorting( document.search, 'zsdocuments', 'state', 'asc');document.search.submit();" class="listheader">[{oxmultilang ident="DOC_STATE" }]</a></td>
                 </tr>
@@ -75,8 +75,8 @@
             [{ if $listitem->getId() == $oxid }]
             [{assign var="listclass" value=listitem4 }]
             [{ /if}]
-            <td valign="top" class="[{ $listclass}]" height="15"><div class="listitemfloating">&nbsp;<a href="Javascript:top.oxid.admin.editThis('[{ $listitem->zsdocuments__oxid->value}]');" class="[{$listclass}]">[{ $listitem->zsdocuments__oxid->value }]</a></div></td>
-            <td valign="top" class="[{ $listclass}]"><div class="listitemfloating"><a href="Javascript:top.oxid.admin.editThis('[{ $listitem->zsdocuments__oxid->value }]');" class="[{$listclass}]">[{$listitem->zsdocuments__marking->value}]</a></div></td>
+            <td valign="top" class="[{ $listclass}]" height="15"><div class="listitemfloating">&nbsp;<a href="Javascript:top.oxid.admin.editThis('[{ $listitem->zsdocuments__oxid->value}]');" class="[{$listclass}]">[{ $listitem->zsdocuments__marking->value }]</a></div></td>
+            <td valign="top" class="[{ $listclass}]"><div class="listitemfloating"><a href="Javascript:top.oxid.admin.editThis('[{ $listitem->zsdocuments__oxid->value }]');" class="[{$listclass}]">[{$listitem->zsdocuments__oxid->value}]</a></div></td>
             <td valign="top" class="[{ $listclass}]"><div class="listitemfloating"><a href="Javascript:top.oxid.admin.editThis('[{ $listitem->zsdocuments__oxid->value }]');" class="[{$listclass}]">[{$listitem->zsdocuments__name->value }]</a></div></td>
             <td valign="top" class="[{ $listclass}]"><div class="listitemfloating"><a href="Javascript:top.oxid.admin.editThis('[{ $listitem->zsdocuments__oxid->value }]');" class="[{$listclass}]">[{$listitem->zsdocuments__state->value }]</a></div></td>
 

@@ -48,7 +48,7 @@
                             [{oxmultilang ident="DOC_PRIMARY_NUMBER" }]
                         </td>
                         <td class="edittext" id="primary_key">
-                            <input style="width: 300px; height: 22px; font-size: 15px; margin-bottom: 7px" class="editinput" type="text" name="editval[zsdocuments__oxid]" value='[{$edit->zsdocuments__oxid->value}]' [{$readonly }]>
+                            <input style="width: 300px; height: 22px; font-size: 15px; margin-bottom: 7px" class="editinput" type="text" name="editval[zsdocuments__marking]" value='[{$edit->zsdocuments__marking->value}]' [{$readonly }]>
                         </td>
                     </tr>
                     <tr>
@@ -56,7 +56,7 @@
                             [{oxmultilang ident="DOC_MARKING" }]
                         </td>
                         <td class="edittext">
-                            <input style="width: 300px; height: 22px; font-size: 15px; margin-bottom: 7px" class="editinput" type="text" name="editval[zsdocuments__marking]" value='[{$edit->zsdocuments__marking->value}]' [{$readonly }]>
+                           <input style="width: 300px; height: 22px; font-size: 15px; margin-bottom: 7px" class="editinput" type="text" name="editval[zsdocuments__oxid]" value='[{$edit->zsdocuments__oxid->value}]' [{$readonly }]>
                         </td>
                     </tr>
                     <tr>
