@@ -5770,3 +5770,12 @@ input.add_documents {
     font-weight: bold !important;
     text-align: left !important;
 }
+.hidden_text {
+    display: none;
+}
+.show_news:hover, .hide_news:hover {
+    text-decoration: none;
+}
+.show_news, .hide_news{
+color: #1d7e96;
+}

@@ -84,5 +84,7 @@ $aLang = array(
     'UPDATE_ACCOUNT_MESSAGE'            => 'Дані успішно оновлені!',
     'PROLONG_ACCOUNT'                   => 'Пролонгувати акаунт',
     'PROLONG_PERIOD'                    => 'Пролонгувати на період',
-    'WANT_TO_CREATE_ACCOUNT'            => 'Придбати профі акаунт'
+    'WANT_TO_CREATE_ACCOUNT'            => 'Придбати профі акаунт',
+    'MORE_NEWS'                         => 'Читати далі',
+    'HIDE_NEWS'                         => 'Згорнути'
 );
